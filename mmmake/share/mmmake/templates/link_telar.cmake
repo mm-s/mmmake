@@ -1,0 +1,7 @@
+IF (TELAR_FOUND)
+
+FOREACH(LINKLIB ${TELAR_LIBRARIES}) 
+target_link_libraries(${prjname} ${LINKLIB})
+ENDFOREACH(LINKLIB)
+
+ENDIF()

@@ -1,0 +1,12 @@
+set(prjname <BMAKE_PRJNAME>)
+set(version <BMAKE_PRJVERSION>)
+
+project(${prjname} CXX)
+
+add_subdirectory(${prjname})
+#IF(INCLUDE_TEST_PROJECTS)
+add_subdirectory(test)
+#ENDIF(INCLUDE_TEST_PROJECTS)
+
+
+

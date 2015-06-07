@@ -1,0 +1,7 @@
+IF (OSGGAUGE_FOUND)
+
+FOREACH(LINKLIB ${OSGGAUGE_LIBRARIES}) 
+target_link_libraries(${prjname} ${LINKLIB})
+ENDFOREACH(LINKLIB)
+
+ENDIF()

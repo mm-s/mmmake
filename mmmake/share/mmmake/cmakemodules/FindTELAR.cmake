@@ -1,0 +1,36 @@
+IF (NOT TELAR_FOUND)
+
+FIND_PATH(TELAR_INCLUDE_PATH telar/core/circular_qu.h
+  /usr/include
+  /usr/local/include
+  DOC "Directory containing Telar headers"
+) 
+
+
+FIND_LIBRARY( TelarCore_LIBRARY
+  NAMES telar
+  PATHS /usr/lib
+        /usr/local/lib
+)
+
+
+SET(TELAR_LIBRARIES ${TelarCore_LIBRARY})
+
+
+IF (TELAR_INCLUDE_PATH AND TelarCore_LIBRARY)
+	SET(TELAR_FOUND TRUE) 
+ENDIF ()
+
+IF (TELAR_FOUND)
+	IF (NOT TELAR_FIND_QUIETLY) 
+		MESSAGE(STATUS "Found TELAR: ${TelarCore_LIBRARY}") 
+	ENDIF (NOT TELAR_FIND_QUIETLY) 
+ELSE (TELAR_FOUND)
+	IF (TELAR_FIND_REQUIRED) 
+		MESSAGE(FATAL_ERROR "Could not find TELAR") 
+	ENDIF (TELAR_FIND_REQUIRED) 
+ENDIF (TELAR_FOUND)
+
+
+
+ENDIF ()

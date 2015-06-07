@@ -1,0 +1,71 @@
+
+SET(Boost_USE_STATIC_LIBS OFF)
+SET(Boost_USE_MULTITHREAD ON)
+FIND_PACKAGE( Boost 1.36.0 COMPONENTS date_time filesystem thread system program_options regex graph REQUIRED)
+add_definitions(-DBOOST_ALL_DYN_LINK)
+
+include_directories( ${Boost_INCLUDE_DIRS} )
+link_directories( ${Boost_LIBRARY_DIRS} )
+
+IF (NOT XERCES_FOUND)
+FIND_PACKAGE(XERCES REQUIRED)
+include_directories( ${XERCES_INCLUDE_DIR} )
+ENDIF( NOT XERCES_FOUND )
+
+IF( NOT XERCES_FOUND )
+  MESSAGE( SEND_ERROR "xerces is mandatory" )
+ENDIF( NOT XERCES_FOUND )
+
+
+
+
+IF (NOT LIBXMLPP_FOUND)
+FIND_PACKAGE(LibXmlPP REQUIRED)
+include_directories( ${LIBXMLPP_INCLUDE_DIR} )
+ENDIF( NOT LIBXMLPP_FOUND )
+
+IF( NOT LIBXMLPP_FOUND )
+  MESSAGE( SEND_ERROR "libxml++ is mandatory" )
+ENDIF(NOT LIBXMLPP_FOUND )
+
+set(ATM_RUNTIME_DESTINATION bin)
+set(ATM_LIBRARY_DESTINATION lib)
+set(ATM_ARCHIVE_DESTINATION lib)
+
+
+macro(selflink prj)
+
+IF(CMAKE_GENERATOR MATCHES "Visual Studio")
+	link_directories(${${prj}_BINARY_DIR}/${prj})
+ELSE(CMAKE_GENERATOR MATCHES "Visual Studio")
+	link_directories(${LIBRARY_OUTPUT_PATH})
+ENDIF(CMAKE_GENERATOR MATCHES "Visual Studio")
+
+include_directories(${${prj}_SOURCE_DIR})
+
+endmacro(selflink)
+
+link_boost(${prjname})
+
+set_target_properties(${prjname} PROPERTIES DEBUG_OUTPUT_NAME ${prjname}d)
+set_target_properties(${prjname} PROPERTIES RELEASE_OUTPUT_NAME ${prjname})
+
+install (TARGETS ${prjname}
+	RUNTIME DESTINATION ${ATM_RUNTIME_DESTINATION}
+	LIBRARY DESTINATION ${ATM_LIBRARY_DESTINATION}
+	ARCHIVE DESTINATION ${ATM_ARCHIVE_DESTINATION}
+	CONFIGURATIONS Debug Release
+	)
+
+#
+#      copy all headers - to feed the development distribution of this library
+#
+MACRO(dump_hdr subdirname)
+make_directory(${CMAKE_CURRENT_BINARY_DIR}/include/${prjname}-${version}/${prjname}/${subdirname})
+foreach(header ${${subdirname}_headers})
+ configure_file(${header} ${CMAKE_CURRENT_BINARY_DIR}/include/${prjname}-${version}/${prjname}/${subdirname} COPYONLY)
+endforeach(header ${${subdirname}_headers})
+ENDMACRO(dump_hdr)
+
+#dump_hdr("")
+

@@ -1,0 +1,9 @@
+IF (NOT Z_FOUND)
+FIND_PACKAGE(Z REQUIRED)
+include_directories( ${Z_INCLUDE_DIR} )
+ENDIF( NOT Z_FOUND )
+
+IF( NOT Z_FOUND )
+  MESSAGE( SEND_ERROR "Z is mandatory" )
+ENDIF( NOT Z_FOUND )
+

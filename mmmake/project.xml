@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="mmmake" major="1" minor="0">
+	<title>CMake wrapper (renamed after bmake on october 2014)</title>	
+	<target name="mmmake" format="executable">
+		<dependencies>
+			<library name="xmlpp"/>
+			<library name="boost"/>
+		</dependencies>
+	</target>
+</project>
+

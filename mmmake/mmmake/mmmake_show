@@ -1,0 +1,246 @@
+#!/bin/bash
+
+
+prjfilename=project.xml
+srcdir=$1
+prj=$2
+command=$3
+
+function usage {
+  echo ""
+  echo "usage:"
+  echo "  mmmake_show <projects source directory> <project_name[.target_name]> <command>"
+  echo "  where command is any of:"
+  echo "  title    :show project title"
+  echo "  target_title  <target>  :show target title"
+  echo "  deps    :show dependant projects"
+  echo "  debian_deps    :show dependant packages for debian"
+  echo "  debian_deps_v    :show dependant packages for debian with version stamp"
+  echo "  targets    :show targets of the project"
+  echo "  target_format <target>   :show format of the given target"
+  echo "  version_major <target>   :show major version number"
+  echo "  version_minor <target>   :show minor version number"
+  echo "  version <target>   :show major.minor version number"
+  echo ""
+  echo "send greeting cards to:"
+  echo "  Marcos Mayorga - marcos.f.mayorgaaguirre@boeing.com"
+  echo "  Boeing BR&TE'2009"
+}
+
+if [ ! -d $srcdir ]; then
+	echo "**error: specified source directory does not exists"
+	usage
+	exit 1
+fi
+
+thisdir=`pwd`
+
+if [ "x${srcdir:0:1}" != "x/" ]; then
+	srcdir=$thisdir/$srcdir
+fi
+
+prjdir=$srcdir/$prj
+
+if [ "x$prjdir" = "x" ]; then
+	echo "**error: project directory not specified."
+	exit 1
+fi
+
+
+if [ "x$BMAKE_PREFIX" = "x" ]; then
+if [ -d /usr/share/mmmake ]; then
+	BMAKE_PREFIX=/usr/share/mmmake
+fi
+fi
+
+if [ "x$BMAKE_PREFIX" = "x" ]; then
+	BMAKE_PREFIX=$srcdir/mmmake/share/mmmake
+fi
+
+xsltdir=$BMAKE_PREFIX
+templatedir=$BMAKE_PREFIX/templates
+cmakemodules=$BMAKE_PREFIX/cmakemodules
+
+function expand_deps_0 {
+	echo "" > edeps
+	ed0_prj=$1
+	ed0_tgt=$2
+	expand_deps $ed0_prj $ed0_tgt
+}
+function expand_deps {
+	ed_prj=$1
+	ed_tgt=$2
+	if [ "x$ed_depth" = "x0" ]; then
+		return
+	fi
+	ed_deps=`xsltproc --stringparam tgt $ed_tgt $xsltdir/dependencies.xsl $srcdir/$ed_prj/$prjfilename`
+	for ed_dep in $ed_deps; do
+		echo "$ed_dep" >> edeps
+		ed_prj=`echo $ed_dep | sed "s#\(.*\)->\(.*\)#\1#"`
+		ed_tgt=`echo $ed_dep | sed "s#\(.*\)->\(.*\)#\2#"`
+		expand_deps $ed_prj $ed_tgt
+	done
+}
+
+
+function show_dependant_projects {
+	gfd_prj=$1
+	gfd_prjdir=$srcdir/$prj
+	gfd_prjxmlfile=$gfd_prjdir/$prjfilename
+	cd $srcdir
+
+	gfd_libs=`xsltproc $xsltdir/targets_shared_libraries.xsl $gfd_prjxmlfile`
+	gfd_exes=`xsltproc $xsltdir/targets_executables.xsl $gfd_prjxmlfile`
+	gfd_modules="$gfd_libs $gfd_exes"
+
+	echo "" > tedeps
+	for gfd_lib in $gfd_modules; do
+		echo "$gfd_prj->$gfd_lib" >> tedeps
+		expand_deps_0 $gfd_prj $gfd_lib $depth
+		cat edeps >> tedeps
+	done
+	rm edeps
+	
+	gfd_all_prj_deps=`cat tedeps | sed "s#\(.*\)->\(.*\)#\1#" | sort | uniq`
+	rm tedeps
+
+	for gfd_prj_dep in $gfd_all_prj_deps; do
+		echo $gfd_prj_dep
+	done
+}
+
+function show_dependant_targets {
+	gfd_prj=$1
+	gfd_prjdir=$srcdir/$prj
+	gfd_prjxmlfile=$gfd_prjdir/$prjfilename
+	cd $srcdir
+
+	myprj=$1
+	mytgt=$2
+
+	echo "" > tedeps
+	echo "$myprj->$mytgt" >> tedeps
+	expand_deps_0 $myprj $mytgt
+	cat edeps >> tedeps
+	rm edeps
+	gfd_all_prj_deps=`cat tedeps | sort | uniq`
+	rm tedeps
+
+	for gfd_prj_dep in $gfd_all_prj_deps; do
+		echo $gfd_prj_dep
+	done
+}
+
+
+if [ "x${command}" = "xdeps" ]; then
+	myprj=`echo $prj | grep "\." | sed "s#\(.*\)\.\(.*\)#\1#"`
+	mytgt=`echo $prj | grep "\." | sed "s#\(.*\)\.\(.*\)#\2#"`
+	if [ "x$mytgt" = "x" ]; then
+		show_dependant_projects $prj
+	else
+		show_dependant_targets $myprj $mytgt
+	fi
+	exit 0
+fi
+
+if [ "x${command}" = "xdebian_deps" ]; then
+	deps=`mmmake_show $srcdir $prj deps`
+	echo $deps
+	exit 0
+fi
+
+if [ "x${command}" = "xdebian_deps_v" ]; then
+	deps=`mmmake_show $srcdir $prj deps`
+	echo $deps
+	exit 0
+fi
+
+
+if [ "x${command}" = "xtargets" ]; then
+	prjdir=$srcdir/$prj
+	prjxmlfile=$prjdir/$prjfilename
+
+	libs=`xsltproc $xsltdir/targets_shared_libraries.xsl $prjxmlfile`
+	exes=`xsltproc $xsltdir/targets_executables.xsl $prjxmlfile`
+	modules="$libs $exes"
+	for module in $modules; do
+		echo $module
+	done
+	exit 0
+fi
+
+if [ "x${command}" = "xtarget_format" ]; then
+	prjdir=$srcdir/$prj
+	prjxmlfile=$prjdir/$prjfilename
+	tf_tgt=$4
+
+	format=`xsltproc --stringparam tgt $tf_tgt $xsltdir/target_format.xsl $prjxmlfile`
+	echo $format
+	exit 0
+fi
+
+if [ "x${command}" = "xversion_major" ]; then
+	prjdir=$srcdir/$prj
+	prjxmlfile=$prjdir/$prjfilename
+	tf_tgt=$4
+
+	major=`xsltproc --stringparam tgt $tf_tgt $xsltdir/version_major.xsl $prjxmlfile`
+	if [ "x$major" = "x" ]; then
+		major="0"
+    fi
+	echo $major
+	exit 0
+fi
+if [ "x${command}" = "xversion_minor" ]; then
+	prjdir=$srcdir/$prj
+	prjxmlfile=$prjdir/$prjfilename
+	tf_tgt=$4
+
+	minor=`xsltproc --stringparam tgt $tf_tgt $xsltdir/version_minor.xsl $prjxmlfile`
+	if [ "x$minor" = "x" ]; then
+		minor="1"
+    fi
+	echo $minor
+	exit 0
+fi
+if [ "x${command}" = "xversion" ]; then
+	prjdir=$srcdir/$prj
+	prjxmlfile=$prjdir/$prjfilename
+	tf_tgt=$4
+
+	major=`xsltproc --stringparam tgt $tf_tgt $xsltdir/version_major.xsl $prjxmlfile`
+	if [ "x$major" = "x" ]; then
+		major="0"
+    fi
+
+	minor=`xsltproc --stringparam tgt $tf_tgt $xsltdir/version_minor.xsl $prjxmlfile`
+	if [ "x$minor" = "x" ]; then
+		minor="1"
+    fi
+
+	echo $major.$minor
+	exit 0
+fi
+
+if [ "x${command}" = "xtitle" ]; then
+	prjdir=$srcdir/$prj
+	prjxmlfile=$prjdir/$prjfilename
+	tf_tgt=$4
+
+	desc=`xsltproc $xsltdir/title.xsl $prjxmlfile`
+	echo $desc
+	exit 0
+fi
+if [ "x${command}" = "xtarget_title" ]; then
+	prjdir=$srcdir/$prj
+	prjxmlfile=$prjdir/$prjfilename
+	tf_tgt=$4
+	desc=`xsltproc --stringparam tgt $tf_tgt $xsltdir/target_title.xsl $prjxmlfile`
+	echo $desc
+	exit 0
+fi
+
+echo "**error: invalid command"
+usage
+exit 3
+

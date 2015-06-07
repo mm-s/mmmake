@@ -1,0 +1,7 @@
+IF (TELAREV_FOUND)
+
+FOREACH(LINKLIB ${TELAREV_LIBRARIES}) 
+target_link_libraries(${prjname} ${LINKLIB})
+ENDFOREACH(LINKLIB)
+
+ENDIF()

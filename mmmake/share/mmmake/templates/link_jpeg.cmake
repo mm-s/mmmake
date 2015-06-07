@@ -1,0 +1,7 @@
+IF (JPEG_FOUND)
+
+FOREACH(LINKLIB ${JPEG_LIBRARIES}) 
+target_link_libraries(${prjname} ${LINKLIB})
+ENDFOREACH(LINKLIB)
+
+ENDIF()

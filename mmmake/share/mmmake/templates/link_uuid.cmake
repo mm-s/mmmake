@@ -1,0 +1,7 @@
+IF (UUID_FOUND)
+
+FOREACH(LINKLIB ${UUID_LIBRARIES}) 
+target_link_libraries(${prjname} ${LINKLIB})
+ENDFOREACH(LINKLIB)
+
+ENDIF()

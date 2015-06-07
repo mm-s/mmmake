@@ -1,0 +1,7 @@
+IF (BZ2_FOUND)
+
+FOREACH(LINKLIB ${BZ2_LIBRARIES}) 
+target_link_libraries(${prjname} ${LINKLIB})
+ENDFOREACH(LINKLIB)
+
+ENDIF()

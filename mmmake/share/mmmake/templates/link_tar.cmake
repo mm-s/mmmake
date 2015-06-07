@@ -1,0 +1,7 @@
+IF (TAR_FOUND)
+
+FOREACH(LINKLIB ${TAR_LIBRARIES}) 
+target_link_libraries(${prjname} ${LINKLIB})
+ENDFOREACH(LINKLIB)
+
+ENDIF()

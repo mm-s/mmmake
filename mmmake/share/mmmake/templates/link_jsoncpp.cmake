@@ -1,0 +1,7 @@
+IF (JSONCPP_FOUND)
+
+FOREACH(LINKLIB ${JSONCPP_LIBRARIES}) 
+target_link_libraries(${prjname} ${LINKLIB})
+ENDFOREACH(LINKLIB)
+
+ENDIF()

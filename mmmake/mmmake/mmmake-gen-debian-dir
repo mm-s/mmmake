@@ -1,0 +1,65 @@
+#!/bin/bash
+
+
+prjfilename=project.xml
+srcdir=$1
+prj=$2
+version_stamp=$3
+
+function usage {
+  echo ""
+  echo "usage:"
+  echo "  mmmake-gen-debian-dir <projects source directory> <project name> version_stamp"
+  echo "example"
+  echo "  mmmake-gen-debian-dir ../src aido 1.0.111075"
+  echo ""
+  echo "generates the debian directory for dpkg-buildpackage"
+  echo ""
+  echo "send greeting cards to:"
+  echo "  Marcos Mayorga - marcos.f.mayorgaaguirre@boeing.com"
+  echo "  Boeing BR&TE'2009"
+}
+
+if [ ! -d $srcdir ]; then
+	echo "**error: specified source directory does not exists"
+	usage
+	exit 1
+fi
+
+thisdir=`pwd`
+
+if [ "x${srcdir:0:1}" != "x/" ]; then
+	srcdir=$thisdir/$srcdir
+fi
+
+prjdir=$srcdir/$prj
+
+if [ "x$prjdir" = "x" ]; then
+	echo "**error: project directory not specified."
+	exit 1
+fi
+
+
+if [ "x$BMAKE_PREFIX" = "x" ]; then
+if [ -d /usr/share/mmmake ]; then
+	BMAKE_PREFIX=/usr/share/mmmake
+fi
+fi
+
+if [ "x$BMAKE_PREFIX" = "x" ]; then
+	BMAKE_PREFIX=$srcdir/mmmake/share/mmmake
+fi
+
+xsltdir=$BMAKE_PREFIX
+templatedir=$BMAKE_PREFIX/templates
+cmakemodules=$BMAKE_PREFIX/cmakemodules
+debian_templates=$BMAKE_PREFIX/debian
+
+
+usage
+exit 3
+
+
+
+
+

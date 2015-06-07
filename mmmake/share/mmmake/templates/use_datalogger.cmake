@@ -1,0 +1,5 @@
+FIND_PACKAGE(DataLogger)
+
+IF (DATALOGGER_FOUND)
+	add_definitions(-DHAVE_DATALOGGER=1)
+ENDIF ()

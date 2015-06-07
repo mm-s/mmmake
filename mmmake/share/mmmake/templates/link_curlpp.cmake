@@ -1,0 +1,7 @@
+IF (CURLPP_FOUND)
+
+FOREACH(LINKLIB ${CURLPP_LIBRARIES}) 
+target_link_libraries(${prjname} ${LINKLIB})
+ENDFOREACH(LINKLIB)
+
+ENDIF()

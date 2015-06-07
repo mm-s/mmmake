@@ -1,0 +1,14 @@
+
+IF (NOT NDDS_FOUND)
+FIND_PACKAGE(NDDS REQUIRED)
+include_directories( ${NDDS_INCLUDE_DIRECTORIES} )
+IF(UNIX)
+	add_definitions(-DRTI_UNIX)
+	add_definitions(-DRTI_LINUX)
+ENDIF(UNIX)
+ENDIF( NOT NDDS_FOUND)
+
+IF(NOT NDDS_FOUND )
+  MESSAGE( SEND_ERROR "ndds is mandatory" )
+ENDIF(NOT NDDS_FOUND )
+

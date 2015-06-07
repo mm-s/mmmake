@@ -1,0 +1,145 @@
+#!/bin/bash
+
+
+prjxmlfile=$1
+command=$2
+
+function usage {
+  echo ""
+  echo "get information with only the project.xml file (no dependencies calculation)"
+  echo "usage:"
+  echo "  mmmake-single-show <path/to/project.xml> <command>"
+  echo "  where command is any of:"
+  echo "  title    :show project title"
+  echo "  deps <target>   :show first level dependencies"
+  echo "  tdeps <target>   :show first level dependencies (only targets)"
+  echo "  target_title  <target>  :show target title"
+  echo "  targets    :show targets of the project"
+  echo "  shared_libraries    :show shared_libray targets"
+  echo "  executables    :show executable targets"
+  echo "  target_format <target>   :show format of the given target"
+  echo "  version_major <target>   :show major version number"
+  echo "  version_minor <target>   :show minor version number"
+  echo "  version <target>   :show major.minor version number"
+  echo ""
+  echo "send greeting cards to:"
+  echo "  Marcos Mayorga - marcos.f.mayorgaaguirre@boeing.com"
+  echo "  Boeing BR&TE'2009"
+}
+
+if [ ! -d $srcdir ]; then
+	echo "**error: specified source directory does not exists"
+	usage
+	exit 1
+fi
+
+thisdir=`pwd`
+
+if [ "x$BMAKE_PREFIX" = "x" ]; then
+if [ -d /usr/share/mmmake ]; then
+	BMAKE_PREFIX=/usr/share/mmmake
+fi
+fi
+
+if [ "x$BMAKE_PREFIX" = "x" ]; then
+	BMAKE_PREFIX=$srcdir/mmmake/share/mmmake
+fi
+
+xsltdir=$BMAKE_PREFIX
+templatedir=$BMAKE_PREFIX/templates
+
+if [ "x${command}" = "xshared_libraries" ]; then
+	libs=`xsltproc $xsltdir/targets_shared_libraries.xsl $prjxmlfile`
+	for lib in $libs; do
+		echo $lib
+	done
+	exit 0
+fi
+
+if [ "x${command}" = "xexecutables" ]; then
+	exes=`xsltproc $xsltdir/targets_executables.xsl $prjxmlfile`
+	for exe in $exes; do
+		echo $exe
+	done
+	exit 0
+fi
+
+if [ "x${command}" = "xtargets" ]; then
+	libs=`xsltproc $xsltdir/targets_shared_libraries.xsl $prjxmlfile`
+	exes=`xsltproc $xsltdir/targets_executables.xsl $prjxmlfile`
+	modules="$libs $exes"
+	for module in $modules; do
+		echo $module
+	done
+	exit 0
+fi
+
+if [ "x${command}" = "xtarget_format" ]; then
+	tf_tgt=$3
+	format=`xsltproc --stringparam tgt $tf_tgt $xsltdir/target_format.xsl $prjxmlfile`
+	echo $format
+	exit 0
+fi
+
+if [ "x${command}" = "xversion_major" ]; then
+	major=`xsltproc $xsltdir/version_major.xsl $prjxmlfile`
+	if [ "x$major" = "x" ]; then
+		major="0"
+	fi
+	echo $major
+	exit 0
+fi
+if [ "x${command}" = "xversion_minor" ]; then
+	minor=`xsltproc $xsltdir/version_minor.xsl $prjxmlfile`
+	if [ "x$minor" = "x" ]; then
+		minor="1"
+	fi
+	echo $minor
+	exit 0
+fi
+if [ "x${command}" = "xversion" ]; then
+	major=`xsltproc $xsltdir/version_major.xsl $prjxmlfile`
+	if [ "x$major" = "x" ]; then
+		major="0"
+	fi
+
+	minor=`xsltproc $xsltdir/version_minor.xsl $prjxmlfile`
+	if [ "x$minor" = "x" ]; then
+		minor="1"
+	fi
+
+	echo $major.$minor
+	exit 0
+fi
+
+if [ "x${command}" = "xtitle" ]; then
+	desc=`xsltproc $xsltdir/title.xsl $prjxmlfile`
+	echo $desc
+	exit 0
+fi
+
+if [ "x${command}" = "xtarget_title" ]; then
+	tf_tgt=$3
+	desc=`xsltproc --stringparam tgt $tf_tgt $xsltdir/target_title.xsl $prjxmlfile`
+	echo $desc
+	exit 0
+fi
+
+if [ "x${command}" = "xdeps" ]; then
+	tf_tgt=$3
+	xsltproc --stringparam tgt $tf_tgt $xsltdir/dependencies.xsl $prjxmlfile
+	exit 0
+fi
+if [ "x${command}" = "xtdeps" ]; then
+	tf_tgt=$3
+	ress=`xsltproc --stringparam tgt $tf_tgt $xsltdir/dependencies.xsl $prjxmlfile`
+	for res in $ress; do
+		echo `echo $res | sed "s#.*->\(.*\)#\1#"`
+	done
+	exit 0
+fi
+
+echo "**error: invalid command"
+usage
+exit 3
+

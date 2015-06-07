@@ -1,0 +1,68 @@
+<apt_map>
+	<bmake_dep name="postgres">
+		<debian_package name="libpq-dev"/>
+	</bmake_dep>
+	<bmake_dep name="ircclient">
+		<debian_package name="libircclient-dev"/>
+	</bmake_dep>
+	<bmake_dep name="z">
+		<debian_package name="zlib1g-dev"/>
+	</bmake_dep>
+	<bmake_dep name="tar">
+		<debian_package name="libtar-dev"/>
+	</bmake_dep>
+	<bmake_dep name="bz2">
+		<debian_package name="libbz2-dev"/>
+	</bmake_dep>
+	<bmake_dep name="jsoncpp">
+		<debian_package name="libjsoncpp-dev"/>
+	</bmake_dep>
+	<bmake_dep name="curlpp">
+		<debian_package name="libcurlpp-dev"/>
+		<debian_package name="libcurl4-gnutls-dev"/>
+
+	</bmake_dep>
+	<bmake_dep name="xmlpp">
+		<debian_package name="libxml++2.6-dev"/>
+		<!-- 
+	cuidado que a veces instala aqui
+/usr/lib/i386-linux-gnu/glibmm-2.4/include/glibmmconfig.h 
+-->
+	</bmake_dep>
+	<bmake_dep name="gtkmm">
+		<debian_package name="libgtkmm-2.4-dev"/>
+		<debian_package name="libglademm-2.4-dev"/>
+	</bmake_dep>
+	<bmake_dep name="swim">
+		<debian_package name="rtidds-dev"/>
+		<debian_package name="libtao-dev"/> <!-- ACE based CORBA ORB core libraries development files -->
+		<debian_package name="tao-naming"/> -> <!-- Librerías del Servicio de Nombres de TAO (CosNaming) -->
+		<debian_package name="libtao-orbsvcs-dev"/> <!-- Includes de la distribución de TAO para el Servicio de Nombres (CosNaming) -->
+		<debian_package name="tao-idl"/> <!-- Compilador de IDLs de TAO -->
+	</bmake_dep>
+	<bmake_dep name="ndds">
+		<debian_package name="rtidds-dev"/> <!-- lawoman repo -->
+	</bmake_dep>
+	<bmake_dep name="xplain">
+		<debian_package name="xplain-dev"/> <!-- lawoman repo -->
+		<debian_package name="mesa-common-dev"/> <!-- for gl.h -->
+	</bmake_dep>
+	<bmake_dep name="sundials">
+		<debian_package name="libsundials-serial-dev" version="= 2.3.0-1"/>
+	</bmake_dep>
+	<bmake_dep name="sqlite">
+		<debian_package name="libsqlite3-dev"/>
+	</bmake_dep>
+	<bmake_dep name="uuid">
+		<debian_package name="uuid-dev"/>
+	</bmake_dep>
+        <bmake_dep name="crypto">
+                <debian_package name="libcrypto++-dev"/>
+                <debian_package name="libssl-dev"/>
+        </bmake_dep>
+        <bmake_dep name="imagemagick">
+                <debian_package name="libmagick++-dev"/>
+        </bmake_dep>
+	 
+</apt_map>
+

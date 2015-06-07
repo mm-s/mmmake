@@ -1,0 +1,12 @@
+
+#include_directories(/usr/include/postgresql)
+
+IF (NOT POSTGRES_FOUND)
+FIND_PACKAGE(POSTGRES REQUIRED)
+include_directories( ${POSTGRES_INCLUDE_DIRECTORIES} )
+ENDIF( NOT POSTGRES_FOUND)
+
+IF( NOT POSTGRES_FOUND )
+  MESSAGE( SEND_ERROR "postgresql is mandatory" )
+ENDIF(NOT POSTGRES_FOUND )
+

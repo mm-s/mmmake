@@ -1,0 +1,11 @@
+IF (DATALOGGER_FOUND)
+
+
+FOREACH(INCDIR ${DataLogger_INCLUDE_PATH} ) 
+include_directories(${INCDIR})
+ENDFOREACH(INCDIR)
+FOREACH(LINKLIB ${DataLogger_LIBRARIES}) 
+target_link_libraries(${prjname} ${LINKLIB})
+ENDFOREACH(LINKLIB)
+
+ENDIF()

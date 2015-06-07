@@ -1,0 +1,25 @@
+/etc/apt/sources.list
+	deb http://mirrors.kernel.org/debian/ squeeze main
+	deb http://mirrors.kernel.org/debian/ unstable main
+
+
+/etc/apt/preferences
+	Package: *
+	Pin: release a=squeeze
+	Pin-Priority: 700
+
+	Package: *
+	Pin: release a=unstable
+	Pin-Priority: 650
+
+	Package: libboost-*
+	Pin: release a=unstable
+	Pin-Priority: 700
+
+
+
+
+aptitude install build-essential g++ cmake zlib1g-dev dpkg-dev xsltproc debhelper libgtkmm-2.4-dev libglademm-2.4-dev libxml++2.6-dev libboost-regex-dev libboost-date-time-dev libboost-thread-dev libboost-filesystem-dev libboost-graph-dev libboost-program-options-dev libpq-dev
+
+
+

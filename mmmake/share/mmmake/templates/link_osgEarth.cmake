@@ -1,0 +1,7 @@
+IF (OSGEARTH_FOUND)
+
+FOREACH(LINKLIB ${OSGEARTH_LIBRARIES}) 
+target_link_libraries(${prjname} ${LINKLIB})
+ENDFOREACH(LINKLIB)
+
+ENDIF()
