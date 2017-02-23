@@ -20,6 +20,8 @@ make mmmake
 build debian package
 --------------------
 
+See required packages at doc/aptitude_install_dependencies
+
 from the package source directory do
 dpkg-buildpackage
 
