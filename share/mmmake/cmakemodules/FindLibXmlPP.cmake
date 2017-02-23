@@ -28,6 +28,8 @@ ENDIF (LIBXMLPP_INCLUDE_DIR AND LIBXMLPP_LIBRARIES)
 #message (${LINKLIB})
 #ENDFOREACH(LINKLIB)
 
+EXEC_PROGRAM(gcc ARGS -dumpmachine OUTPUT_VARIABLE TRIPLET)
+
 FIND_PATH(LIBXMLPP_MAIN_INCLUDE_DIR libxml++/libxml++.h
    PATHS
    /usr/include
@@ -37,6 +39,8 @@ FIND_PATH(LIBXMLPP_MAIN_INCLUDE_DIR libxml++/libxml++.h
 FIND_PATH(LIBXMLPP_LIB_INCLUDE_DIR libxml++config.h
    PATHS
    /usr/lib
+   /usr/lib/${TRIPLET}
+#   /usr/lib/x86_64-linux-gnu
    c:/GTK/lib
    PATH_SUFFIXES libxml++-2.6/include
    )
@@ -49,11 +53,12 @@ FIND_PATH(LIBXMLPP_GLIBMM_MAIN_INCLUDE_DIR glibmm/value_basictypes.h
 FIND_PATH(LIBXMLPP_GLIB_LIB_INCLUDE_DIR glibconfig.h
    PATHS
    /usr/lib
+#   /usr/lib/x86_64-linux-gnu
+   /usr/lib/${TRIPLET}
    c:/GTK/lib
    PATH_SUFFIXES glib-2.0/include
    )
 
-EXEC_PROGRAM(gcc ARGS -dumpmachine OUTPUT_VARIABLE TRIPLET)
 
 FIND_PATH(LIBXMLPP_GLIBMM_LIB_INCLUDE_DIR glibmmconfig.h
    PATHS

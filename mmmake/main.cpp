@@ -1,3 +1,15 @@
+/*
+   *****************************************************************
+    BlockChain SDK
+    (C) 2017 nChain - London.
+
+    TODO: Licence info.
+
+    Rev date: 2017-02-23T14:50:45.000000Z                         
+    Rev : 7                         
+   *****************************************************************
+*/
+
 
 #include "disem.h"
 
@@ -6,7 +18,7 @@
 using namespace std;
 
 void usage() {
-	cout << "mmmake " << bmake::disem::get_version() << endl;
+	cout << "mmmake " << mmmake::disem::version << endl;
 	cout << "usage" << endl;
 	cout << "  mmmake <projects source directory> <project name> <debug|release>" << endl;
 	cout << "  mmmake <project name>" << endl;
@@ -31,17 +43,17 @@ void usage() {
 	cout << "  $> mmmake ../src hifisim debug" << endl;
 	cout << "" << endl;
 	cout << "environment:" << endl;
-	cout << "  BMAKE_CROSS=<toolset>" << endl;
+	cout << "  MMMAKE_CROSS=<toolset>" << endl;
 	cout << "     toolset can be any of:" << endl;
 	cout << "       MINGW32" << endl;
-	cout << "  BMAKE_SINGLE_TARGET=yes   force production of static libs except to the top level project" << endl;
-	cout << "  BMAKE_FORCE_STATIC_LIBS=yes   force production of static libs including the top level project" << endl;
-	cout << "  BMAKE_TWO_PHASE_WRITE=yes   write files only if the new content is different" << endl;
+	cout << "  MMMAKE_SINGLE_TARGET=yes   force production of static libs except to the top level project" << endl;
+	cout << "  MMMAKE_FORCE_STATIC_LIBS=yes   force production of static libs including the top level project" << endl;
+	cout << "  MMMAKE_TWO_PHASE_WRITE=yes   write files only if the new content is different" << endl;
 
 	cout << "" << endl;
 	cout << "send greeting to:" << endl;
 	cout << "  Marcos Mayorga - mm@mm-studios.com" << endl; //marcos.f.mayorgaaguirre@boeing.com; marcos@fairluck.org" << endl;
-	cout << "  BR&TE'2009 2010 (as bmake)" << "; mm-studios 2014-2015" << endl;
+	cout << "  Boeing BR&TE 2009 2010 (as bmake)" << "; mm-studios 2014-2017" << endl;
 }
 
 #include <boost/filesystem/path.hpp>
