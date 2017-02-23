@@ -23,8 +23,8 @@ function usage {
   echo "  version <target>   :show major.minor version number"
   echo ""
   echo "send greeting cards to:"
-  echo "  Marcos Mayorga - marcos.f.mayorgaaguirre@boeing.com"
-  echo "  Boeing BR&TE'2009"
+  echo "  Marcos Mayorga - mm@mm-studios.com"
+  echo "  2009-1017"
 }
 
 if [ ! -d $srcdir ]; then
@@ -35,18 +35,18 @@ fi
 
 thisdir=`pwd`
 
-if [ "x$BMAKE_PREFIX" = "x" ]; then
+if [ "x$MMMAKE_PREFIX" = "x" ]; then
 if [ -d /usr/share/mmmake ]; then
-	BMAKE_PREFIX=/usr/share/mmmake
+	MMMAKE_PREFIX=/usr/share/mmmake
 fi
 fi
 
-if [ "x$BMAKE_PREFIX" = "x" ]; then
-	BMAKE_PREFIX=$srcdir/mmmake/share/mmmake
+if [ "x$MMMAKE_PREFIX" = "x" ]; then
+	MMMAKE_PREFIX=$srcdir/mmmake/share/mmmake
 fi
 
-xsltdir=$BMAKE_PREFIX
-templatedir=$BMAKE_PREFIX/templates
+xsltdir=$MMMAKE_PREFIX
+templatedir=$MMMAKE_PREFIX/templates
 
 if [ "x${command}" = "xshared_libraries" ]; then
 	libs=`xsltproc $xsltdir/targets_shared_libraries.xsl $prjxmlfile`
