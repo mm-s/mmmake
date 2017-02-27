@@ -1,4 +1,4 @@
 FIND_PACKAGE(UNIVALUE REQUIRED)
-add_definitions(${UNIVALUE_INCLUDE})
+include_directories(${UNIVALUE_INCLUDE})
 
 

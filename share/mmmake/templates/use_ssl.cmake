@@ -1,4 +1,4 @@
 FIND_PACKAGE(SSL REQUIRED)
-add_definitions(${SSL_INCLUDE})
+include_directories(${SSL_INCLUDE})
 
 

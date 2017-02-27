@@ -15,7 +15,7 @@ IF (ANL_FOUND)
 	SET(grd ${ANL_ROOT_DIR})
 	LINK_DIRECTORIES(${grd}/lib)
 	SET(ANL_LIBS anl)
-	SET(ANL_INCLUDE ${grd}/include )
+	SET(ANL_INCLUDE_DIR ${grd}/include )
 	MESSAGE(STATUS "Found ANL: ${ANL_ROOT_DIR}") 
 
 ELSE (ANL_FOUND)

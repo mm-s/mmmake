@@ -1,4 +1,4 @@
 FIND_PACKAGE(ANL REQUIRED)
-add_definitions(${ANL_INCLUDE})
+include_directories(${ANL_INCLUDE_DIR})
 
 
