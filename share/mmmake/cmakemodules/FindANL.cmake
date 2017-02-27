@@ -12,18 +12,10 @@ IF (ANL_ROOT_DIR)
 ENDIF (ANL_ROOT_DIR)
 
 IF (ANL_FOUND)
-	SET( ENV{PKG_CONFIG_PATH} ${ANL_ROOT_DIR}/lib/pkgconfig )
-
 	SET(grd ${ANL_ROOT_DIR})
-
 	LINK_DIRECTORIES(${grd}/lib)
-
 	SET(ANL_LIBS anl)
-
 	SET(ANL_INCLUDE ${grd}/include )
-
-	link_directories( ${ANL_ROOT_DIR}/lib )
-
 	MESSAGE(STATUS "Found ANL: ${ANL_ROOT_DIR}") 
 
 ELSE (ANL_FOUND)
