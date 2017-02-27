@@ -1,0 +1,39 @@
+IF (NOT SECP256K1_FOUND)
+
+FIND_PATH(SECP256K1_ROOT_DIR include/secp256k1.h
+	/usr
+	/usr/local
+	c:/include
+	DOC "Directory containing SECP256K1 headers"
+)
+
+IF (SECP256K1_ROOT_DIR)
+	SET(SECP256K1_FOUND TRUE) 
+ENDIF (SECP256K1_ROOT_DIR)
+
+IF (SECP256K1_FOUND)
+	SET( ENV{PKG_CONFIG_PATH} ${SECP256K1_ROOT_DIR}/lib/pkgconfig )
+
+IF(UNIX)
+	exec_program(pkg-config ARGS "--libs libsecp256k1" OUTPUT_VARIABLE SECP256K1_LIBS)
+	exec_program(pkg-config ARGS "--cflags libsecp256k1" OUTPUT_VARIABLE SECP256K1_INCLUDE)
+else(UNIX)
+	SET(grd ${SECP256K1_ROOT_DIR})
+
+	LINK_DIRECTORIES(${grd}/lib)
+
+	SET(SECP256K1_LIBS secp256k1)
+
+	SET(SECP256K1_INCLUDE ${grd}/include )
+endif(UNIX)
+
+	link_directories( ${SECP256K1_ROOT_DIR}/lib )
+
+	MESSAGE(STATUS "Found SECP256K1: ${SECP256K1_ROOT_DIR}") 
+
+ELSE (SECP256K1_FOUND)
+	MESSAGE(FATAL_ERROR "Could not find SECP256K1") 
+ENDIF (SECP256K1_FOUND)
+
+ENDIF (NOT SECP256K1_FOUND)
+
