@@ -2,13 +2,13 @@ Source: mmmake
 Section: unknown
 Priority: extra
 Maintainer: Marcos Mayorga <mm@mm-studios.com>
-Build-Depends: debhelper (>= 7), xsltproc 
+Build-Depends: debhelper (>= 7),xsltproc , libxml++2.6-dev
 Standards-Version: 3.8.1
 Homepage: http://mm-studios.com
 
 Package: mmmake
 Architecture: any
-Depends: cmake
+Depends: cmake, xsltproc, libxml++2.6
 Description: C00L build T00L for C++ projects
  MMmake is a cool build tool for C++ projects
 
