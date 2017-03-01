@@ -1,11 +1,9 @@
 Build System for C++/Linux
 ------------------
 
-Initially designed to get over the complexities that CMake originated in the group of Researchers who wanted to write C++ programs.
+Designed to simplify CMake.
 It works by automatically generating and maintaining the CMake scripts that otherwise must have to be maintained by hand.
-mmmake project file is easy to read and maintain and is standard XML.
-
-
+mmmake project.xml file is easy to read and maintain and is standard XML.
 
 Build from sources
 ------------------
@@ -26,3 +24,6 @@ from the package source directory do
 dpkg-buildpackage
 
 
+
+--
+see the wiki https://github.com/mm-s/mmmake/wiki
