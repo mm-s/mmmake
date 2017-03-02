@@ -5,6 +5,7 @@
 
 #include <string>
 #include <iostream>
+#include <set>
 
 namespace mmmake {
 using namespace std;
@@ -13,8 +14,12 @@ class sources;
 
 class MMMAKE_EXPORT_IMPORT_POLICY third_party_dependency {
 public:
-	third_party_dependency(const string& name, const string& components="");
+	third_party_dependency(const string& name);
 	virtual ~third_party_dependency();
+
+	void add_components(const string& line);
+	string get_components() const;
+
 
 	inline const std::string& get_name() const { return _name; }
 
@@ -29,7 +34,7 @@ private:
 	sources* _sources;
 
 	string _name;
-	string _components;
+	set<string> _components;
 
 };
 

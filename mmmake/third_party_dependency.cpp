@@ -6,10 +6,33 @@ typedef mmmake::third_party_dependency c;
 using namespace std;
 
 
-c::third_party_dependency(const string& name, const string& com): _name(name), _sources(0), _components(com) {
+c::third_party_dependency(const string& name): _name(name), _sources(0) {
 }
 
 c::~third_party_dependency() {
+}
+
+
+void c::add_components(const string& line) {
+	istringstream is(line);
+	while(is.good()) {
+		string item;
+		is >> item;
+		if (!item.empty()) {
+			auto i=_components.find(item);
+			if (i!=_components.end()) continue;
+			_components.emplace(item);
+		}
+	}
+}
+
+
+string c::get_components() const {
+	ostringstream os;
+	for (auto& i:_components) {
+		os << i << " ";
+	return os.str();
+
 }
 
 #include <sstream>
@@ -18,7 +41,7 @@ c::~third_party_dependency() {
 
 void c::write_use_snippet(std::ostream& os) const {
 	if (!_components.empty()) {
-		os << "set(MMAKE_COMPONENTS " << _components << ")" << std::endl;
+		os << "set(MMAKE_COMPONENTS " << get_components() << ")" << std::endl;
 	}
 	os << std::endl;
 	os << "#use snippet for " << _name << std::endl;
