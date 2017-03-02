@@ -82,7 +82,7 @@ void c::write_cmake(std::ostream& os) const {
 	os << "" << endl;
 	os << "project(${prjname} CXX)" << endl;
 	
-os << "if(\"${CMAKE_VERSION}\" VERSION_GREATER 3.6.1)" << endl
+os << "if(\"${CMAKE_VERSION}\" VERSION_GREATER 3.6.1)" << endl;
 os << "               set(CMAKE_CXX_STANDARD 14)" << endl;
 os << "               set(CMAKE_CXX_STANDARD_REQUIRED ON)" << endl;
 os << "else()" << endl;
