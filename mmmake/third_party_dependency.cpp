@@ -29,10 +29,11 @@ void c::add_components(const string& line) {
 }
 
 
-string c::get_components() const {
+std::string c::get_components() const {
 	ostringstream os;
 	for (auto& i:_components) {
 		os << i << " ";
+	}
 	return os.str();
 
 }
