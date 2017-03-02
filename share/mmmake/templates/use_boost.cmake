@@ -1,7 +1,10 @@
-SET(BMAKE_STATIC_LINK $ENV{BMAKE_SINGLE_TARGET})
-SET(BMAKE_STATIC_LINK_DEUCE $ENV{BMAKE_FORCE_STATIC_LIBS})
 
-IF(BMAKE_STATIC_LINK)
+#set(MMAKE_COMPONENTS date_time filesystem thread system program_options regex graph)
+
+SET(MMMAKE_STATIC_LINK $ENV{MMMAKE_SINGLE_TARGET})
+SET(MMMAKE_STATIC_LINK_DEUCE $ENV{MMMAKE_FORCE_STATIC_LIBS})
+
+IF(MMMAKE_STATIC_LINK)
 	message("Using boost static libraries")
 	set(Boost_USE_STATIC_LIBS ON)
 else()
@@ -17,10 +20,9 @@ IF(WIN32)
 	ENDIF()
 ENDIF()
 
-#find_package( Boost 1.36.0 COMPONENTS date_time filesystem thread system program_options regex graph python REQUIRED)
-find_package( Boost 1.36.0 COMPONENTS date_time filesystem thread system program_options regex graph REQUIRED)
+find_package( Boost 1.36.0 COMPONENTS ${MMAKE_COMPONENTS} REQUIRED)
 
-IF(BMAKE_STATIC_LINK)
+IF(MMMAKE_STATIC_LINK)
 else()
 	add_definitions(-DBOOST_ALL_DYN_LINK)
 	add_definitions(-DBOOST_FILESYSTEM_VERSION=3)

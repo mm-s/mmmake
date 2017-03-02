@@ -13,7 +13,7 @@ class sources;
 
 class MMMAKE_EXPORT_IMPORT_POLICY third_party_dependency {
 public:
-	third_party_dependency(const string& name);
+	third_party_dependency(const string& name, const string& components);
 	virtual ~third_party_dependency();
 
 	inline const std::string& get_name() const { return _name; }
@@ -29,6 +29,7 @@ private:
 	sources* _sources;
 
 	string _name;
+	string _components;
 
 };
 

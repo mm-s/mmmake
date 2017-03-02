@@ -375,8 +375,9 @@ void c::parse(mmmake::project& parent, const dom_element& e) {
 					for (xmlpp::Node::NodeList::const_iterator J=ch.begin(); J!=ch.end(); ++J) {
 						xmlpp::Element* el2=dynamic_cast<xmlpp::Element*>(*J);
 						if (el2!=0) {
-							std::string name=el2->get_attribute_value("name");
-							third_party_dependency& t=parent.get_sources().get_third_party_dependency(name);
+							string name=el2->get_attribute_value("name");
+							string components=el2->get_attribute_value("components");
+							third_party_dependency& t=parent.get_sources().get_third_party_dependency(name,components);
 							_third_party_dependencies.insert(&t);
 						}
 					}

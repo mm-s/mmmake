@@ -3,8 +3,10 @@
 
 typedef mmmake::third_party_dependency c;
 
+using namespace std;
 
-c::third_party_dependency(const std::string& name): _name(name), _sources(0) {
+
+c::third_party_dependency(const string& name, const string& com): _name(name), _sources(0), _components(com) {
 }
 
 c::~third_party_dependency() {
@@ -15,6 +17,9 @@ c::~third_party_dependency() {
 
 
 void c::write_use_snippet(std::ostream& os) const {
+	if (!_components.empty()) {
+		os << "set(MMAKE_COMPONENTS " << _components << ")" << std::endl;
+	}
 	os << std::endl;
 	os << "#use snippet for " << _name << std::endl;
 	os << "#------------------------------------------------------------------------------" << std::endl;
