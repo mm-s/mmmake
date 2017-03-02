@@ -1,5 +1,6 @@
 #include "third_party_dependency.h"
 #include "sources.h"
+#include <sstream>
 
 typedef mmmake::third_party_dependency c;
 
