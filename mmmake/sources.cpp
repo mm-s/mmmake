@@ -128,7 +128,7 @@ third_party_dependency& c::get_third_party_dependency(const std::string& name) {
 	//std::cout << "getting project: " << name << std::endl;
 	third_party_dependencies::iterator I=_third_party_dependencies.find(name);
 	if (I==_third_party_dependencies.end()) {
-		third_party_dependency* p=new third_party_dependency(name);
+		third_party_dependency* p=new third_party_dependency(name,"");
 		_third_party_dependencies.insert(third_party_dependencies::value_type(name,p));
 		p->set_sources(*this);
 //		p->load(_path / name / "project.xml" );
