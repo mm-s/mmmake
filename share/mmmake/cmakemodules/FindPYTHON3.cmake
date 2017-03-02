@@ -1,9 +1,27 @@
 IF (NOT PYTHON3_FOUND)
 
-  exec_program(x86_64-linux-gnu-python3-config ARGS "--ldflags" OUTPUT_VARIABLE PYTHON3_LDFLAGS)
-  exec_program(x86_64-linux-gnu-python3-config ARGS "--cflags" OUTPUT_VARIABLE PYTHON3_CFLAGS)
-  exec_program(x86_64-linux-gnu-python3-config ARGS "--libs" OUTPUT_VARIABLE PYTHON3_LIBS)
-  exec_program(x86_64-linux-gnu-python3-config ARGS "--include" OUTPUT_VARIABLE PYTHON3_INCLUDE)
+FIND_PATH(PYTHON3_INCLUDE python3.5m/pyhash.h
+	PATHS
+	/usr
+	/usr/local
+	c:/
+	PATH_SUFFIXES include
+	DOC "Directory containing PYTHON3 headers"
+
+)
+
+FIND_LIBRARY(PYTHON3_LIBS NAMES python3.5m
+   PATHS
+   /usr
+   /usr/local
+   c:/
+   PATH_SUFFIXES lib/python3.5/config-3.5m-x86_64-linux-gnu
+   )
+
+#  exec_program(x86_64-linux-gnu-python3-config ARGS "--ldflags" OUTPUT_VARIABLE PYTHON3_LDFLAGS)
+#  exec_program(x86_64-linux-gnu-python3-config ARGS "--cflags" OUTPUT_VARIABLE PYTHON3_CFLAGS)
+#  exec_program(x86_64-linux-gnu-python3-config ARGS "--libs" OUTPUT_VARIABLE PYTHON3_LIBS)
+#  exec_program(x86_64-linux-gnu-python3-config ARGS "--include" OUTPUT_VARIABLE PYTHON3_INCLUDE)
 
 
   IF (PYTHON3_INCLUDE AND PYTHON3_LIBS)
@@ -20,3 +38,6 @@ IF (NOT PYTHON3_FOUND)
     ENDIF (Python3_FIND_REQUIRED) 
   ENDIF (PYTHON3_FOUND)
 ENDIF (NOT PYTHON3_FOUND)
+
+
+

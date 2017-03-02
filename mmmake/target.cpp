@@ -220,7 +220,7 @@ void c::write_cmake(const path& prj_path) const {
 
 	os << "set_target_properties(${prjname} PROPERTIES DEBUG_OUTPUT_NAME ${prjname}${DEBUG_TARGET_SUFFIX})" << endl;
 	os << "set_target_properties(${prjname} PROPERTIES RELEASE_OUTPUT_NAME ${prjname})" << endl;
-	os << "set_property(TARGET ${prjname} PROPERTY CXX_STANDARD 14)" << endl;
+//	os << "set_property(TARGET ${prjname} PROPERTY CXX_STANDARD 14)" << endl;
 
 	{
 		project::project_dependencies pds;
