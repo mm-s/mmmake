@@ -198,6 +198,15 @@ void c::write_main_cmake() const {
 	os << "LINK_DIRECTORIES(${LIBRARY_OUTPUT_PATH})" << endl;
 	os << "SET(CMAKE_MODULE_PATH $ENV{CMAKE_MODULE_PATH})" << endl;
 
+	os << "if(\"${CMAKE_VERSION}\" VERSION_GREATER 3.6.1)" << endl;
+	os << "               set(CMAKE_CXX_STANDARD 14)" << endl;
+	os << "               set(CMAKE_CXX_STANDARD_REQUIRED ON)" << endl;
+	os << "else()" << endl;
+	os << "               add_definitions(-std=c++14)" << endl;
+	os << "endif()" << endl;
+
+
+
 	project& topp=const_cast<c&>(*this).get_project(_top_project);
 
 	project::third_party_dependencies tpdeps=topp.get_all_third_party_dependencies();

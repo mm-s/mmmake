@@ -82,13 +82,6 @@ void c::write_cmake(std::ostream& os) const {
 	os << "" << endl;
 	os << "project(${prjname} CXX)" << endl;
 	
-os << "if(\"${CMAKE_VERSION}\" VERSION_GREATER 3.6.1)" << endl;
-os << "               set(CMAKE_CXX_STANDARD 14)" << endl;
-os << "               set(CMAKE_CXX_STANDARD_REQUIRED ON)" << endl;
-os << "else()" << endl;
-os << "               add_definitions(-std=c++14)" << endl;
-os << "endif()" << endl;
-
 	for (targets::const_iterator I=get_targets().begin(); I!=get_targets().end(); ++I) {
 		I->second->write_cmake(get_sources().get_path() / get_name());
 		os << "add_subdirectory(" << (I->second)->get_name() << ")" << endl;
