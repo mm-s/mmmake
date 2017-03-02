@@ -1,10 +1,11 @@
 #include "third_party_dependency.h"
 #include "sources.h"
 #include <sstream>
+#include <fstream>
 
 typedef mmmake::third_party_dependency c;
 
-using namespace std;
+//using namespace std;
 
 
 c::third_party_dependency(const string& name): _name(name), _sources(0) {
@@ -35,10 +36,6 @@ string c::get_components() const {
 	return os.str();
 
 }
-
-#include <sstream>
-#include <fstream>
-
 
 void c::write_use_snippet(std::ostream& os) const {
 	if (!_components.empty()) {

@@ -1,23 +1,15 @@
-#ifndef MMMAKE_DISEM
-#define MMMAKE_DISEM
-
-#include "mmmake.h"
+#ifndef _mmmake_DISEM_
+#define _mmmake_DISEM_
 #include <string>
 namespace mmmake {
-
-struct MMMAKE_EXPORT_IMPORT_POLICY disem {
-	static const std::string major;
-	static const std::string minor;
-	static const std::string rev;
-
-	static std::string get_version() { return major + "." + minor + "." + rev; }
-};
-
+namespace disem {
+extern const int major;
+extern const int minor;
+extern const int rev;
+extern const std::string version;
+extern const std::string date;
 }
-
-
-
-
+}
 #endif
 
 
