@@ -54,9 +54,10 @@ void c::write_use_snippet(std::ostream& os) const {
 		std::cerr << "unable to find template " << oss.str() << ". You need to have " << _name << " development libraries installed in your system." << std::endl;
 		throw oss2.str().c_str();
 	}
-	char line[1000];
-	while (!ifs.eof()) {
-		ifs.getline(line,999);
+	while (ifs.good()) {
+		string line;
+		getline(ifs,line);
+		if (!line.empty())
 		os << line << std::endl;
 	}
 	os << std::endl;
@@ -66,7 +67,7 @@ void c::write_use_snippet(std::ostream& os) const {
 
 void c::write_link_snippet(std::ostream& os) const {
 	os << std::endl;
-	os << "#link snippet for " << _name;
+	os << "#link snippet for " << _name << std::endl;
 	os << "#------------------------------------------------------------------------------" << std::endl;
 	std::ostringstream oss;
 	oss << "link_" << _name << ".cmake";
@@ -77,12 +78,12 @@ void c::write_link_snippet(std::ostream& os) const {
 		std::cerr << "unable to find template " << oss.str() << std::endl;
 		throw oss2.str().c_str();
 	}
-	char line[1000];
-	while (!ifs.eof()) {
-		ifs.getline(line,999);
+	while (ifs.good()) {
+		string line;
+		getline(ifs,line);
+		if (!line.empty())
 		os << line << std::endl;
 	}
-	os << std::endl;
 	os << "#------------------------------------------------------------------------------" << std::endl;
 	os << std::endl;
 }

@@ -12,6 +12,16 @@ add_executable(${prjname} ${all_headers} ${all_sources})
 set_target_properties(${prjname} PROPERTIES DEBUG_OUTPUT_NAME ${prjname}${DEBUG_TARGET_SUFFIX})
 set_target_properties(${prjname} PROPERTIES RELEASE_OUTPUT_NAME ${prjname})
 
+#link snippet for boost#------------------------------------------------------------------------------
+
+target_link_libraries(${prjname} ${Boost_LIBRARIES})
+
+
+
+
+#------------------------------------------------------------------------------
+
+
 #link snippet for xmlpp#------------------------------------------------------------------------------
 
 FOREACH(INCDIR ${LIBXMLPP_INCLUDE_DIRS} ) 
@@ -22,15 +32,6 @@ target_link_libraries(${prjname} ${LINKLIB})
 ENDFOREACH(LINKLIB)
 
 
-
-#------------------------------------------------------------------------------
-
-
-#link snippet for boost#------------------------------------------------------------------------------
-
-target_link_libraries(${prjname} ${Boost_LIBRARIES})
-
- 
 
 #------------------------------------------------------------------------------
 
