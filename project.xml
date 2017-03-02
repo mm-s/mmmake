@@ -4,7 +4,7 @@
 	<target name="mmmake" format="executable">
 		<dependencies>
 			<library name="xmlpp"/>
-			<library name="boost" components="filesystem"/>
+			<library name="boost" components="system filesystem"/>
 		</dependencies>
 	</target>
 </project>
