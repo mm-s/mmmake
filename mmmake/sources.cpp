@@ -4,8 +4,8 @@
 #include <cstdlib>
 
 
-typedef bmake::sources c;
-using namespace bmake;
+typedef mmmake::sources c;
+using namespace mmmake;
 
 
 c::sources(const path& p, const std::string& top_project, const std::string& bt): _path(p), _top_project(top_project), _build_type(bt), _unique_target(false), _force_static_libs(false), _two_phase_write(false),
@@ -35,7 +35,7 @@ _include_tests("false")
     #endif
 
 	std::string data_prefix("/usr/share/mmmake");
-	from_env(data_prefix,"BMAKE_PREFIX");
+	from_env(data_prefix,"MMMAKE_PREFIX");
 	_data_prefix=path(data_prefix);
 
 	from_env(_cxxflags,"CMAKE_CXX_FLAGS");
@@ -47,9 +47,9 @@ _include_tests("false")
 	from_env(_debugsuffix,"DEBUG_TARGET_SUFFIX");
 	from_env(_include_tests,"cbuild_include_test_projects");
 	std::string exclude_targets;
-	from_env(exclude_targets,"BMAKE_EXCLUDE_TARGETS");
+	from_env(exclude_targets,"MMMAKE_EXCLUDE_TARGETS");
 	std::string include_targets;
-	from_env(include_targets,"BMAKE_INCLUDE_TARGETS");
+	from_env(include_targets,"MMMAKE_INCLUDE_TARGETS");
 	{
 	std::istringstream iss(include_targets);
 	while (!iss.eof()) {

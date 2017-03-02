@@ -1,7 +1,7 @@
 #include "static_library.h"
 
 
-typedef bmake::static_library c;
+typedef mmmake::static_library c;
 
 
 void c::write_cmake(const path& p) const {

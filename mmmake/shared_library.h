@@ -1,5 +1,5 @@
-#ifndef _BMAKE_SHARED_LIBRARY_
-#define _BMAKE_SHARED_LIBRARY_
+#ifndef _MMMAKE_SHARED_LIBRARY_
+#define _MMMAKE_SHARED_LIBRARY_
 
 #include "mmmake.h"
 #include "target.h"
@@ -7,16 +7,16 @@
 
 #include <string>
 
-namespace bmake {
+namespace mmmake {
+using namespace std;
 
-
-class BMAKE_EXPORT_IMPORT_POLICY shared_library: public target {
+class MMMAKE_EXPORT_IMPORT_POLICY shared_library: public target {
 	typedef target B;
 public:
 
 	virtual void write_cmake(const path&) const;
 
-	virtual void write_definitions(std::ostream& os) const;
+	virtual void write_definitions(ostream& os) const;
 
 };
 

@@ -1,11 +1,11 @@
-#ifndef BMAKE_DISEM
-#define BMAKE_DISEM
+#ifndef MMMAKE_DISEM
+#define MMMAKE_DISEM
 
 #include "mmmake.h"
 #include <string>
-namespace bmake {
+namespace mmmake {
 
-struct BMAKE_EXPORT_IMPORT_POLICY disem {
+struct MMMAKE_EXPORT_IMPORT_POLICY disem {
 	static const std::string major;
 	static const std::string minor;
 	static const std::string rev;

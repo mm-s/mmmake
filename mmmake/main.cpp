@@ -59,7 +59,7 @@ void usage() {
 #include <boost/filesystem/path.hpp>
 #include "sources.h"
 
-void invoke_cmake(const bmake::sources&);
+void invoke_cmake(const mmmake::sources&);
 
 int main(int argc, char *argv[]) {
 	boost::filesystem::path curPath=boost::filesystem::current_path();
@@ -89,16 +89,16 @@ int main(int argc, char *argv[]) {
 	std::cout << "using '" << srcdir << "' as projects container directory" << std::endl;
 
 	std::string single_target("false");
-	bmake::sources::from_env(single_target,"BMAKE_SINGLE_TARGET");
+	mmmake::sources::from_env(single_target,"MMMAKE_SINGLE_TARGET");
 
 	std::string force_static_libs("false");
-	bmake::sources::from_env(force_static_libs,"BMAKE_FORCE_STATIC_LIBS");
+	mmmake::sources::from_env(force_static_libs,"MMMAKE_FORCE_STATIC_LIBS");
 
 	std::string two_phase_write("false");
-	bmake::sources::from_env(two_phase_write,"BMAKE_TWO_PHASE_WRITE");
+	mmmake::sources::from_env(two_phase_write,"MMMAKE_TWO_PHASE_WRITE");
 
 	boost::filesystem::path p(srcdir);
-	bmake::sources s(p,topprj,confname);
+	mmmake::sources s(p,topprj,confname);
 
 
 	if (force_static_libs!="false") {
@@ -106,7 +106,7 @@ int main(int argc, char *argv[]) {
 			s.set_force_static_libs();
 		}
 		else
-			std::cerr << "*** error: unrecognized value for BMAKE_FORCE_STATIC_LIBS" << std::endl;
+			std::cerr << "*** error: unrecognized value for MMMAKE_FORCE_STATIC_LIBS" << std::endl;
 	}
 	
 
@@ -115,7 +115,7 @@ int main(int argc, char *argv[]) {
 			s.set_unique_target();
 		}
 		else
-			std::cerr << "*** error: unrecognized value for BMAKE_SINGLE_TARGET" << std::endl;
+			std::cerr << "*** error: unrecognized value for MMMAKE_SINGLE_TARGET" << std::endl;
 	}
 
 	if (two_phase_write!="false") {
@@ -123,7 +123,7 @@ int main(int argc, char *argv[]) {
 			s.set_two_phase_write();
 		}
 		else
-			std::cerr << "*** error: unrecognized value for BMAKE_TWO_PHASE_WRITE" << std::endl;
+			std::cerr << "*** error: unrecognized value for MMMAKE_TWO_PHASE_WRITE" << std::endl;
 	}
 
 	s.load();
@@ -134,12 +134,12 @@ int main(int argc, char *argv[]) {
 #include <stdlib.h>
 #include <sstream>
 
-void invoke_cmake(const bmake::sources& src) {
+void invoke_cmake(const mmmake::sources& src) {
 	std::string generator("KDevelop3");
-	bmake::sources::from_env(generator,"CMAKE_GENERATOR");
+	mmmake::sources::from_env(generator,"CMAKE_GENERATOR");
 
 	std::string cross;
-	bmake::sources::from_env(cross,"BMAKE_CROSS");
+	mmmake::sources::from_env(cross,"MMMAKE_CROSS");
 
 	if (cross == "MINGW32") {
 		std::cout << "setting environment variables to cross compile with mingw" << std::endl;

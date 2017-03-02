@@ -1,5 +1,5 @@
-#ifndef BMAKE_H_INCLUDED
-#define BMAKE_H_INCLUDED
+#ifndef MMMAKE_H_INCLUDED
+#define MMMAKE_H_INCLUDED
 
 #if defined(_MSC_VER)
 //4251: some class or template needs to have dll-interface to be used by clients of this class 
@@ -14,20 +14,20 @@
 // to use the classes provided by this library
 
 #ifdef _WIN32
-#  ifdef BMAKE_EXPORT_SYMBOLS
-#    define BMAKE_EXPORT_IMPORT_POLICY __declspec(dllexport)
-#    define BMAKE_EXPORT_IMPORT_POLICY_MSG "	BMAKE: Exporting symbols"
+#  ifdef MMMAKE_EXPORT_SYMBOLS
+#    define MMMAKE_EXPORT_IMPORT_POLICY __declspec(dllexport)
+#    define MMMAKE_EXPORT_IMPORT_POLICY_MSG "	MMMAKE: Exporting symbols"
 #  else
-#	ifdef BMAKE_IMPORT_SYMBOLS
-#		define BMAKE_EXPORT_IMPORT_POLICY __declspec(dllimport)
-#		 define BMAKE_EXPORT_IMPORT_POLICY_MSG "	BMAKE: Importing symbols"
+#	ifdef MMMAKE_IMPORT_SYMBOLS
+#		define MMMAKE_EXPORT_IMPORT_POLICY __declspec(dllimport)
+#		 define MMMAKE_EXPORT_IMPORT_POLICY_MSG "	MMMAKE: Importing symbols"
 #	else
-#		define BMAKE_EXPORT_IMPORT_POLICY
-#		 define BMAKE_EXPORT_IMPORT_POLICY_MSG "	BMAKE: neither importing nor exporting symbols"
+#		define MMMAKE_EXPORT_IMPORT_POLICY
+#		 define MMMAKE_EXPORT_IMPORT_POLICY_MSG "	MMMAKE: neither importing nor exporting symbols"
 #	endif
 #  endif
 #else
-# define BMAKE_EXPORT_IMPORT_POLICY __attribute__ ((visibility("default")))
+# define MMMAKE_EXPORT_IMPORT_POLICY __attribute__ ((visibility("default")))
 #endif
 
 #ifndef SHOW_IMPORT_EXPORT_MSG
@@ -38,7 +38,7 @@
 
 #ifdef _WIN32
 #ifdef SHOW_IMPORT_EXPORT_MSG
-#pragma message (BMAKE_EXPORT_IMPORT_POLICY_MSG)
+#pragma message (MMMAKE_EXPORT_IMPORT_POLICY_MSG)
 #endif
 #endif
 

@@ -1,5 +1,5 @@
-#ifndef _BMAKE_SOURCES_
-#define _BMAKE_SOURCES_
+#ifndef _MMMAKE_SOURCES_
+#define _MMMAKE_SOURCES_
 
 #include "mmmake.h"
 
@@ -11,12 +11,12 @@
 #include <boost/filesystem/path.hpp>
 #include <iostream>
 
-namespace bmake {
+namespace mmmake {
 
 class project;
 class third_party_dependency;
 
-class BMAKE_EXPORT_IMPORT_POLICY sources {
+class MMMAKE_EXPORT_IMPORT_POLICY sources {
 public:
 	typedef boost::filesystem::path path;
 	typedef std::map<std::string, project*> projects;

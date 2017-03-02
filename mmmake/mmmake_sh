@@ -24,7 +24,7 @@ function usage {
   echo "  \$> mmmake ../src hifisim debug"
   echo ""
   echo "environment:"
-  echo "  BMAKE_CROSS=<toolset>"
+  echo "  MMMAKE_CROSS=<toolset>"
   echo "     toolset can be any of:"
   echo "       MINGW32"
   echo ""
@@ -69,24 +69,24 @@ if [ ! -d $prjdir ]; then
 	exit 1
 fi
 
-if [ "x$BMAKE_PREFIX" = "x" ]; then
+if [ "x$MMMAKE_PREFIX" = "x" ]; then
 if [ -d /usr/share/mmmake ]; then
-	BMAKE_PREFIX=/usr/share/mmmake
+	MMMAKE_PREFIX=/usr/share/mmmake
 fi
 fi
 
-if [ "x$BMAKE_PREFIX" = "x" ]; then
-	BMAKE_PREFIX=$srcdir/mmmake/share/mmmake
+if [ "x$MMMAKE_PREFIX" = "x" ]; then
+	MMMAKE_PREFIX=$srcdir/mmmake/share/mmmake
 fi
 
 
-echo "mmmake shared directory: $BMAKE_PREFIX"
+echo "mmmake shared directory: $MMMAKE_PREFIX"
 echo "source dir = $srcdir"
 
 
-xsltdir=$BMAKE_PREFIX
-templatedir=$BMAKE_PREFIX/templates
-cmakemodules=$BMAKE_PREFIX/cmakemodules
+xsltdir=$MMMAKE_PREFIX
+templatedir=$MMMAKE_PREFIX/templates
+cmakemodules=$MMMAKE_PREFIX/cmakemodules
 
 function expand_deps_0 {
 	echo "" > edeps
@@ -118,7 +118,7 @@ gcpf_prjversion=`xsltproc $xsltdir/prjversion.xsl $gcpf_prjxmlfile`
 
 echo "generating $gcpf_prjdir/CMakeLists.txt"
 #CMakeLists.txt root file
-#cat $templatedir/root_CMakeLists.txt.template | sed "s-<BMAKE_PRJNAME>-$gcpf_prjname-" | sed "s-<BMAKE_PRJVERSION>-$gcpf_prjversion-" > $gcpf_prjdir/CMakeLists.txt
+#cat $templatedir/root_CMakeLists.txt.template | sed "s-<MMMAKE_PRJNAME>-$gcpf_prjname-" | sed "s-<MMMAKE_PRJVERSION>-$gcpf_prjversion-" > $gcpf_prjdir/CMakeLists.txt
 
 gcpf_libs=`xsltproc $xsltdir/targets_shared_libraries.xsl $gcpf_prjxmlfile`
 gcpf_exes=`xsltproc $xsltdir/targets_executables.xsl $gcpf_prjxmlfile`
@@ -282,7 +282,7 @@ for gcpf_lib in $gcpf_modules; do
 
 	echo "set_target_properties(\${prjname} PROPERTIES DEBUG_OUTPUT_NAME \${prjname}\${DEBUG_TARGET_SUFFIX})" >> $outf	
 	echo "set_target_properties(\${prjname} PROPERTIES RELEASE_OUTPUT_NAME \${prjname})" >> $outf
-	if [ "x$BMAKE_CROSS" = "xMINGW32" ]; then
+	if [ "x$MMMAKE_CROSS" = "xMINGW32" ]; then
 		echo "set_target_properties(\${prjname} PROPERTIES PREFIX \"\" SUFFIX \".dll\")" >> $outf
 	fi
 	echo "" >> $outf
@@ -498,7 +498,7 @@ fi
 
 builddir=$curdir
 
-if [ "x$BMAKE_CROSS" = "xMINGW32" ]; then
+if [ "x$MMMAKE_CROSS" = "xMINGW32" ]; then
     toolset=i586-mingw32msvc
 	export CC=${toolset}-gcc
 	export CXX=${toolset}-g++

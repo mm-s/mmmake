@@ -1,6 +1,6 @@
 #include "disem.h"
 
-typedef bmake::disem c;
+typedef mmmake::disem c;
 
 const std::string c::major="0";
 const std::string c::minor="0";

@@ -4,7 +4,7 @@
 #include "executable.h"
 
 
-typedef bmake::project c;
+typedef mmmake::project c;
 
 c::project(): _sources(0), _major("0"), _minor("1") {
 }
@@ -89,7 +89,7 @@ void c::write_cmake(std::ostream& os) const {
 	
 }
 
-bmake::target& c::get_target(const std::string& name) {
+mmmake::target& c::get_target(const std::string& name) {
 	targets::iterator I=_targets.find(name);
 	if (I==_targets.end()) {
 		std::cerr << "***error: target " << name << " in project " << get_name() << " not found" << std::endl;

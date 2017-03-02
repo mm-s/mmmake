@@ -1,7 +1,7 @@
 #include "third_party_dependency.h"
 #include "sources.h"
 
-typedef bmake::third_party_dependency c;
+typedef mmmake::third_party_dependency c;
 
 
 c::third_party_dependency(const std::string& name): _name(name), _sources(0) {

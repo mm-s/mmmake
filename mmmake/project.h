@@ -1,5 +1,5 @@
-#ifndef _BMAKE_PROJECT_
-#define _BMAKE_PROJECT_
+#ifndef _MMMAKE_PROJECT_
+#define _MMMAKE_PROJECT_
 
 #include "mmmake.h"
 
@@ -12,13 +12,13 @@
 #include <iostream>
 #include <libxml++/libxml++.h>
 
-namespace bmake {
+namespace mmmake {
 
 class shared_library;
 class executable;
 class sources;
 
-class BMAKE_EXPORT_IMPORT_POLICY project {
+class MMMAKE_EXPORT_IMPORT_POLICY project {
 public:
 	typedef boost::filesystem::path path;
 	typedef xmlpp::Element dom_element;

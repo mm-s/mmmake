@@ -1,7 +1,7 @@
 #include "shared_library.h"
 
 
-typedef bmake::shared_library c;
+typedef mmmake::shared_library c;
 
 
 void c::write_cmake(const path& p) const {

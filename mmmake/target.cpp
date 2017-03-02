@@ -3,7 +3,7 @@
 #include "project.h"
 
 
-typedef bmake::target c;
+typedef mmmake::target c;
 
 
 c::target(): _project(0), _unit_test(false) {
@@ -264,7 +264,7 @@ void c::write_cmake(const path& prj_path) const {
 #include "executable.h"
 #include "sources.h"
 
-c* c::create(bmake::project& parent,const dom_element& e) {
+c* c::create(mmmake::project& parent,const dom_element& e) {
 	std::string format;
 	format=e.get_attribute_value("format");
 	std::string name=e.get_attribute_value("name");
@@ -306,7 +306,7 @@ void c::resolvedeps() {
 	}
 }
 
-void c::parse(bmake::project& parent, const dom_element& e) {
+void c::parse(mmmake::project& parent, const dom_element& e) {
 	set_project(parent);
 
 	_name=e.get_attribute_value("name");

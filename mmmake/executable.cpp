@@ -1,6 +1,6 @@
 #include "executable.h"
 
-typedef bmake::executable c;
+typedef mmmake::executable c;
 
 using namespace std;
 void c::write_cmake(const path& p) const {

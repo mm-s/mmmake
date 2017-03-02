@@ -40,20 +40,20 @@ if [ "x$prjdir" = "x" ]; then
 fi
 
 
-if [ "x$BMAKE_PREFIX" = "x" ]; then
+if [ "x$MMMAKE_PREFIX" = "x" ]; then
 if [ -d /usr/share/mmmake ]; then
-	BMAKE_PREFIX=/usr/share/mmmake
+	MMMAKE_PREFIX=/usr/share/mmmake
 fi
 fi
 
-if [ "x$BMAKE_PREFIX" = "x" ]; then
-	BMAKE_PREFIX=$srcdir/mmmake/share/mmmake
+if [ "x$MMMAKE_PREFIX" = "x" ]; then
+	MMMAKE_PREFIX=$srcdir/mmmake/share/mmmake
 fi
 
-xsltdir=$BMAKE_PREFIX
-templatedir=$BMAKE_PREFIX/templates
-cmakemodules=$BMAKE_PREFIX/cmakemodules
-debian_templates=$BMAKE_PREFIX/debian
+xsltdir=$MMMAKE_PREFIX
+templatedir=$MMMAKE_PREFIX/templates
+cmakemodules=$MMMAKE_PREFIX/cmakemodules
+debian_templates=$MMMAKE_PREFIX/debian
 
 
 usage

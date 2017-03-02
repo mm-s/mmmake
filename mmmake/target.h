@@ -1,5 +1,5 @@
-#ifndef _BMAKE_TARGET_
-#define _BMAKE_TARGET_
+#ifndef _MMMAKE_TARGET_
+#define _MMMAKE_TARGET_
 
 #include "mmmake.h"
 
@@ -11,13 +11,13 @@
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
 
-namespace bmake {
+namespace mmmake {
 
 
 class project;
 class third_party_dependency;
 
-class BMAKE_EXPORT_IMPORT_POLICY target {
+class MMMAKE_EXPORT_IMPORT_POLICY target {
 public:
 	typedef boost::filesystem::path path;
 	typedef xmlpp::Element dom_element;
