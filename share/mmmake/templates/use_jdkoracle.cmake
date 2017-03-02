@@ -1,0 +1,4 @@
+FIND_PACKAGE(JDKORACLE REQUIRED)
+include_directories(${JDKORACLE_INCLUDE})
+
+
