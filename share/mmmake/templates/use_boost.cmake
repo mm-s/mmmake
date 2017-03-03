@@ -1,6 +1,3 @@
-
-#set(MMAKE_COMPONENTS date_time filesystem thread system program_options regex graph)
-
 SET(MMMAKE_STATIC_LINK $ENV{MMMAKE_SINGLE_TARGET})
 SET(MMMAKE_STATIC_LINK_DEUCE $ENV{MMMAKE_FORCE_STATIC_LIBS})
 
@@ -32,7 +29,3 @@ if(Boost_FOUND)
 include_directories( ${Boost_INCLUDE_DIRS} )
 link_directories( ${Boost_LIBRARY_DIRS} )
 endif()
-
-
-
-
