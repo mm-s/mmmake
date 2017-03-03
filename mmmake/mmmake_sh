@@ -29,8 +29,9 @@ function usage {
   echo "       MINGW32"
   echo ""
   echo "send greeting cards to:"
-  echo "  Marcos Mayorga - marcos.f.mayorgaaguirre@boeing.com"
-  echo "  BR&TE'2009"
+  echo "  Marcos Mayorga - mm@mm-studios.com"
+#  echo "  Marcos Mayorga - marcos.f.mayorgaaguirre@boeing.com"
+  echo "  BR&TE'2009 - 2017"
 }
 
 if [ ! -d $srcdir ]; then
@@ -316,7 +317,7 @@ for gcpf_lib in $gcpf_modules; do
 	xsltproc --stringparam tgt $gcpf_lib $xsltdir/3pdependencies.xsl $gcpf_prjxmlfile >> 3pdeps
 	gcpf_treepd=`cat 3pdeps | sort | uniq`
 	rm 3pdeps
-	
+
 	for gcpf_tgt3p_dep in $gcpf_treepd; do
 		cat $templatedir/link_$gcpf_tgt3p_dep.cmake >> $outf
 	done
@@ -455,6 +456,13 @@ grpf_treepd=`cat 3pdeps | sort | uniq`
 rm 3pdeps
 
 for grpf_tp in $grpf_treepd; do
+	#hack boost once this old script is only dedicated to build mmmake itself
+	if [ "_$gcpf_tgt3p_dep" == "_boost" ]; then
+		echo "" >> $outf
+		echo "set(MMAKE_COMPONENTS filesystem system)" >> $outf
+		echo "" >> $outf
+	fi
+
 	echo "" >> $outf
 	cat "$templatedir/use_$grpf_tp.cmake" >> $outf
 	echo "" >> $outf
