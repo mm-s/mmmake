@@ -429,6 +429,12 @@ echo "LINK_DIRECTORIES(\${LIBRARY_OUTPUT_PATH})" >> $outf
 echo "SET(CMAKE_MODULE_PATH \$ENV{CMAKE_MODULE_PATH})" >> $outf
 
 
+echo "if(\"${CMAKE_VERSION}\" VERSION_GREATER 3.6.1)" >> $outf
+echo "               set(CMAKE_CXX_STANDARD 14)" >> $outf
+echo "               set(CMAKE_CXX_STANDARD_REQUIRED ON)" >> $outf
+echo "else()" >> $outf
+echo "               add_definitions(-std=c++14)" >> $outf
+echo "endif()" >> $outf
 
 
 grpf_libs=`xsltproc $xsltdir/targets_shared_libraries.xsl $grpf_prjxmlfile`
