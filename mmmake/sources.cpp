@@ -15,7 +15,7 @@ _cxxflagsrelease("-O3 -g0"),
 _cflags(""),
 _cflagsdebug("-O0 -g3"),
 _cflagsrelease("-O3 -g0"),
-_debugsuffix("d"),
+_debugsuffix(""),
 _include_tests("false")
  {
 

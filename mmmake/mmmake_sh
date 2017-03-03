@@ -391,7 +391,7 @@ else
     echo "environment variable \${CMAKE_C_FLAGS_RELEASE} not set, defaults to $cflagsrelease"
 fi
 
-debugsuffix="d"
+debugsuffix=""
 if [ "x$DEBUG_TARGET_SUFFIX" != "x" ]; then
 	debugsuffix=$DEBUG_TARGET_SUFFIX
 else
