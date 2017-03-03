@@ -457,7 +457,7 @@ rm 3pdeps
 
 for grpf_tp in $grpf_treepd; do
 	#hack boost once this old script is only dedicated to build mmmake itself
-	if [ "_$gcpf_tgt3p_dep" == "_boost" ]; then
+	if [ "_$grpf_tp" == "_boost" ]; then
 		echo "" >> $outf
 		echo "set(MMAKE_COMPONENTS filesystem system)" >> $outf
 		echo "" >> $outf
