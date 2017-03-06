@@ -5,16 +5,17 @@ FIND_PATH(PYTHON3_INCLUDE Python.h
 	/usr
 	/usr/local
 	c:/
-	PATH_SUFFIXES include/python3.5m
+	PATH_SUFFIXES include/python3.4m include/python3.5m
 	DOC "Directory containing PYTHON3 headers"
 )
 
-FIND_LIBRARY(PYTHON3_LIBS NAMES python3.5m
+FIND_LIBRARY(PYTHON3_LIBS NAMES python3.4m python3.5m
    PATHS
    /usr
    /usr/local
    c:/
    PATH_SUFFIXES lib/python3.5/config-3.5m-x86_64-linux-gnu
+   	         lib/python3.4/config-3.4m-x86_64-linux-gnu
    )
 
 #/usr/include/python3.5m/pyhash.h
