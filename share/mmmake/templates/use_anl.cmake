@@ -1,4 +1,8 @@
 FIND_PACKAGE(ANL REQUIRED)
-include_directories(${ANL_INCLUDE_DIR})
+#include_directories(${ANL_INCLUDE_DIR})
+
+IF( NOT ANL_FOUND )
+  MESSAGE( SEND_ERROR "ANL is mandatory" )
+ENDIF(NOT ANL_FOUND )
 
 

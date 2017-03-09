@@ -1,4 +1,7 @@
 FIND_PACKAGE(SSL REQUIRED)
-include_directories(${SSL_INCLUDE})
+#include_directories(${SSL_INCLUDE})
+IF( NOT SSL_FOUND )
+  MESSAGE( SEND_ERROR "SSL is mandatory" )
+ENDIF(NOT SSL_FOUND )
 
 

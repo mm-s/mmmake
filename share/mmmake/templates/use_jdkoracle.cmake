@@ -1,5 +1,9 @@
 FIND_PACKAGE(JDKORACLE REQUIRED)
-include_directories(${JDKORACLE_INCLUDE})
-include_directories(${JDKORACLE_ARCH_INCLUDE})
+#include_directories(${JDKORACLE_INCLUDE})
+#include_directories(${JDKORACLE_ARCH_INCLUDE})
+
+IF( NOT JDKORACLE_FOUND )
+  MESSAGE( SEND_ERROR "Oracle JDK is mandatory" )
+ENDIF(NOT JDKORACLE_FOUND )
 
 

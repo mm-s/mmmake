@@ -205,18 +205,17 @@ void c::write_main_cmake() const {
 	os << "               add_definitions(-std=c++14)" << endl;
 	os << "endif()" << endl;
 
+	os << "EXEC_PROGRAM(gcc ARGS -dumpmachine OUTPUT_VARIABLE MMMAKE_TRIPLET)" << endl;
 
 
 	project& topp=const_cast<c&>(*this).get_project(_top_project);
+
 
 	project::third_party_dependencies tpdeps=topp.get_all_third_party_dependencies();
 	for (project::third_party_dependencies::const_iterator I=tpdeps.begin(); I!=tpdeps.end(); ++I) {
 		(*I)->write_use_snippet(os);
 	}
-
 	os << endl;
-
-
 
 	project::project_dependencies deps=topp.get_project_dependencies();
 	deps.insert(&topp);

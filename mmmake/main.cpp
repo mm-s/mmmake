@@ -135,7 +135,9 @@ int main(int argc, char *argv[]) {
 #include <sstream>
 
 void invoke_cmake(const mmmake::sources& src) {
-	std::string generator("KDevelop3");
+//	std::string generator("KDevelop3");
+	std::string generator("Unix Makefiles");
+
 	mmmake::sources::from_env(generator,"CMAKE_GENERATOR");
 
 	std::string cross;
@@ -182,6 +184,7 @@ void invoke_cmake(const mmmake::sources& src) {
 	}
 	std::ostringstream oss;
 	oss << "cmake -G \"" << generator << "\" " << src.get_path().string();
+    cout << "Executing " << oss.str() << endl;
 	system(oss.str().c_str());
 
 }

@@ -148,6 +148,15 @@ void c::write_cmake(const path& prj_path) const {
 
 	os << "#mmmake" << endl;
 
+/*
+	third_party_dependencies tpdeps=get_all_third_party_dependencies();
+	for (project::third_party_dependencies::const_iterator I=tpdeps.begin(); I!=tpdeps.end(); ++I) {
+		(*I)->write_use_snippet(os);
+	}
+	os << endl;
+*/
+
+
 	if (is_unittest()) {
 		if (get_name()!="test") {
 		os << "set(prjname " << get_name() << ")" << endl;

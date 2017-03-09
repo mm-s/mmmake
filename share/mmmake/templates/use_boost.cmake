@@ -19,6 +19,9 @@ ENDIF()
 
 find_package( Boost 1.36.0 COMPONENTS ${MMAKE_COMPONENTS} REQUIRED)
 
+
+if (false)
+
 IF(MMMAKE_STATIC_LINK)
 else()
 	add_definitions(-DBOOST_ALL_DYN_LINK)
@@ -28,4 +31,7 @@ endif()
 if(Boost_FOUND)
 include_directories( ${Boost_INCLUDE_DIRS} )
 link_directories( ${Boost_LIBRARY_DIRS} )
+endif()
+
+
 endif()
