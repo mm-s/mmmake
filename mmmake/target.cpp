@@ -32,6 +32,13 @@ c::third_party_dependencies c::get_all_third_party_dependencies() const {
 	return ds;
 }
 
+bool c::needs_qt5() const {
+	for (third_party_dependencies::const_iterator I=_third_party_dependencies.begin(); I!=_third_party_dependencies.end(); ++I) {
+		if ((*I)->get_name()=="qt5") return true;
+	}
+    return false;
+}
+
 void c::put_all_third_party_dependencies(third_party_dependencies& d) const {
 	for (third_party_dependencies::const_iterator I=_third_party_dependencies.begin(); I!=_third_party_dependencies.end(); ++I) {
 		d.insert(*I);
@@ -224,6 +231,12 @@ void c::write_cmake(const path& prj_path) const {
 	for (definitions::const_iterator I=_definitions.begin(); I!=_definitions.end(); ++I) {
 		os << "add_definitions(" << (*I) << ")" << endl;
 	}
+
+    if (needs_qt5()) {
+        os << "set(CMAKE_INCLUDE_CURRENT_DIR ON)" << endl;
+        os << "set(CMAKE_AUTOMOC ON)" << endl;
+        os << "set(CMAKE_AUTOUIC ON)" << endl;
+    }
 
 	write_definitions(os);
 

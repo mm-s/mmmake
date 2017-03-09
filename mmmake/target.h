@@ -38,6 +38,8 @@ public:
 	typedef std::set<const target*> dependencies;
 	typedef std::set<const third_party_dependency*> third_party_dependencies;
 
+    bool needs_qt5() const;
+
 
 	const dependencies& get_dependencies() const { return _dependencies; }
 	dependencies get_all_dependencies() const;
