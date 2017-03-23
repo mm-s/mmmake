@@ -250,8 +250,8 @@ for gcpf_lib in $gcpf_libs; do
 
 	echo "" >> $outf
 	echo "STRING(TOUPPER \${prjname} PRJNAME)" >> $outf
-	pname=`echo ${prjname} | tr '-' '_'`
-	echo "add_definitions(-D\${pname}_EXPORT_SYMBOLS) " >> $outf
+#	pname=`echo ${prjname} | tr '-' '_'`
+#	echo "add_definitions(-D\${pname}_EXPORT_SYMBOLS) " >> $outf
 	echo "" >> $outf
 
 	echo "add_library(\${prjname} SHARED \${all_headers} \${all_sources})" >> $outf
