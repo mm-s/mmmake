@@ -62,6 +62,7 @@ c::dirs c::get_header_dirs(const path& p) const {
 	for (boost::filesystem::recursive_directory_iterator I=boost::filesystem::recursive_directory_iterator(p); I!=end;) {
 		std::string parent_name=I->path().parent_path().filename().string();
 		if (parent_name==".svn") { I.pop(); continue; }
+		if (parent_name==".git") { I.pop(); continue; }
 		if (parent_name.find("_off",0)!=std::string::npos) { I.pop(); continue; }
 		std::string ext=I->path().extension().string();
 		if (ext==".h" || ext==".hpp") {
@@ -84,6 +85,7 @@ c::dirs c::get_cpp_dirs(const path& p) const {
 	for (boost::filesystem::recursive_directory_iterator I=boost::filesystem::recursive_directory_iterator(p); I!=end;) {
 		std::string parent_name=I->path().parent_path().filename().string();
 		if (parent_name==".svn") { I.pop(); continue; }
+		if (parent_name==".git") { I.pop(); continue; }
 		if (parent_name.find("_off",0)!=std::string::npos) { I.pop(); continue; }
 		std::string ext=I->path().extension().string();
 		if (ext==".c" || ext==".cpp" || ext==".cxx") {
@@ -385,7 +387,7 @@ void c::parse(mmmake::project& parent, const dom_element& e) {
 //		<codegen id="jni_headers" append_path="JDKORACLE_ROOT/bin">bin/generate_jni_headers</codegen>
 				codegen cdg;
 				cdg.id=el->get_attribute_value("id");
-				cdg.append_path=el->get_attribute_value("target");
+				cdg.append_path=el->get_attribute_value("append_path");
                                 if (el->has_child_text()) {
                                         cdg.cmd=el->get_child_text()->get_content();
                                 }
