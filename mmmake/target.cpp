@@ -296,6 +296,7 @@ void c::codegen::gen(ostream& os) const {
 	os << "# code generator id: " << id << endl;
 	if (!append_path.empty()) {
 		os << "set( path $ENV{PATH}:" << append_path << "  )" << endl;
+		os << "set( ENV{PATH} ${path} )" << endl;
 	}
 	os << "get_filename_component(PARENT_DIR ${CMAKE_CURRENT_LIST_DIR} DIRECTORY)" << endl;
 	os << "execute_process(COMMAND ${PARENT_DIR}/" << cmd << "  )" << endl;
