@@ -85,7 +85,7 @@ void c::write_cmake(std::ostream& os) const {
 
 	for (targets::const_iterator I=get_targets().begin(); I!=get_targets().end(); ++I) {
 		I->second->write_cmake(get_sources().get_path() / get_name());
-		os << "add_subdirectory(" << (I->second)->get_name() << ")" << endl;
+		I->second->write_project_cmake(os);
 	}
 	
 }

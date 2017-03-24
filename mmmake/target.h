@@ -86,6 +86,9 @@ public:
 
 	void resolvedeps();
 
+
+	virtual void write_project_cmake(ostream& os) const;
+
 private:
 	std::string _name;
 	std::string _title;

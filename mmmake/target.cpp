@@ -448,4 +448,7 @@ void c::parse(mmmake::project& parent, const dom_element& e) {
 }
 
 
+void c::write_project_cmake(ostream& os) const {
+     os << "add_subdirectory(" << get_name() << ")" << endl;
+}
 
