@@ -193,10 +193,11 @@ void c::write_cmake(const path& prj_path) const {
 			os <<  "file (GLOB " << identif << "_headers *.h *.hpp)" << endl;
 		}
 		else {
-			os <<  "file (GLOB " << identif << "_headers " << dir << "/*.h " << dir << "/*.hpp)" << endl;
+			os <<  "file (GLOB " << identif << "_headers " << dir << "/*.h " << dir << "/*.hpp)" << endl;  /**/
 		}
 		os << "SOURCE_GROUP(\"" << to_group(dir) << "\" FILES ${" << identif << "_headers})" << endl;
 	}
+
 
 	dirs sources=get_cpp_dirs(here);
 	for (dirs::const_iterator I=sources.begin(); I!=sources.end(); ++I) {
@@ -206,10 +207,16 @@ void c::write_cmake(const path& prj_path) const {
 			os <<  "file (GLOB " << identif << "_sources *.cpp *.c)" << endl;
 		}
 		else {
-			os <<  "file (GLOB " << identif << "_sources " << dir << "/*.cpp " << dir << "/*.c "  << dir << "/*.cxx)" << endl;
+			os <<  "file (GLOB " << identif << "_sources " << dir << "/*.cpp " << dir << "/*.c "  << dir << "/*.cxx)" << endl;  /**/
 		}
 		os << "SOURCE_GROUP(\"" << to_group(dir) << "\" FILES ${" << identif << "_sources})" << endl;
 	}
+
+
+	for (auto& i:codegens) {  //code generators
+		i.gen(os);
+	}
+
 
 	os << "set(all_headers ";
 	for (dirs::const_iterator I=headers.begin(); I!=headers.end(); ++I) {
@@ -280,6 +287,17 @@ void c::write_cmake(const path& prj_path) const {
 
 	}
 }
+
+void c::codegen::gen(ostream& os) const {
+	if (cmd.empty()) return;
+	os << "# code generator id: " << id << endl;
+	if (!append_path.empty()) {
+		os << "set( path $ENV{PATH}:" << append_path << "  )" << endl;
+	}
+	os << "get_filename_component(PARENT_DIR ${CMAKE_CURRENT_LIST_DIR} DIRECTORY)" << endl;
+	os << "execute_process(COMMAND ${PARENT_DIR}/" << cmd << "  )" << endl;
+}
+
 
 #include "shared_library.h"
 #include "static_library.h"
@@ -356,6 +374,22 @@ void c::parse(mmmake::project& parent, const dom_element& e) {
 		}
 	}
 
+	{
+		xmlpp::Node::NodeList ch=e.get_children("codegen");
+		for (xmlpp::Node::NodeList::const_iterator J=ch.begin(); J!=ch.end(); ++J) {
+			xmlpp::Element* el=dynamic_cast<xmlpp::Element*>(*J);
+			if (el!=0) {
+//		<codegen id="jni_headers" append_path="JDKORACLE_ROOT/bin">bin/generate_jni_headers</codegen>
+				codegen cdg;
+				cdg.id=el->get_attribute_value("id");
+				cdg.append_path=el->get_attribute_value("target");
+                                if (el->has_child_text()) {
+                                        cdg.cmd=el->get_child_text()->get_content();
+                                }
+				codegens.push_back(cdg);
+			}
+		}
+	}
 
 	{
 		xmlpp::Node::NodeList ch=e.get_children("dependencies");

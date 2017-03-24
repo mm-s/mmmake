@@ -6,6 +6,7 @@
 #include <string>
 #include <set>
 #include <list>
+#include <vector>
 #include <iostream>
 #include <libxml++/libxml++.h>
 #include <boost/filesystem/operations.hpp>
@@ -13,6 +14,7 @@
 
 namespace mmmake {
 
+using namespace std;
 
 class project;
 class third_party_dependency;
@@ -21,6 +23,17 @@ class MMMAKE_EXPORT_IMPORT_POLICY target {
 public:
 	typedef boost::filesystem::path path;
 	typedef xmlpp::Element dom_element;
+
+	struct codegen {
+//              <codegen id="jni_headers" append_path="JDKORACLE_ROOT/bin">bin/generate_jni_headers</codegen>
+		string id;
+		string append_path;
+		string cmd;
+
+		void gen(ostream& os) const;
+	};
+	vector<codegen> codegens;
+
 
 	target();
 	virtual ~target();
@@ -38,7 +51,7 @@ public:
 	typedef std::set<const target*> dependencies;
 	typedef std::set<const third_party_dependency*> third_party_dependencies;
 
-    bool needs_qt5() const;
+	bool needs_qt5() const;
 
 
 	const dependencies& get_dependencies() const { return _dependencies; }
