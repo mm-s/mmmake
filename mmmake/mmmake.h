@@ -13,6 +13,12 @@
 // (when using this header to build the library) or imported (when some other project wants
 // to use the classes provided by this library
 
+#ifndef MMMAKE_EXPORT_SYMBOLS
+#ifdef mmmake_EXPORTS
+ #define MMMAKE_EXPORT_SYMBOLS
+#endif
+#endif
+
 #ifdef _WIN32
 #  ifdef MMMAKE_EXPORT_SYMBOLS
 #    define MMMAKE_EXPORT_IMPORT_POLICY __declspec(dllexport)

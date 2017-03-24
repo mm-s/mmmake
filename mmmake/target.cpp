@@ -5,6 +5,7 @@
 
 typedef mmmake::target c;
 
+using namespace mmmake;
 
 c::target(): _project(0), _unit_test(false) {
 }
@@ -302,39 +303,41 @@ void c::codegen::gen(ostream& os) const {
 #include "shared_library.h"
 #include "static_library.h"
 #include "executable.h"
+#include "toolset.h"
 #include "sources.h"
 
+
+
 c* c::create(mmmake::project& parent,const dom_element& e) {
-	std::string format;
-	format=e.get_attribute_value("format");
-	std::string name=e.get_attribute_value("name");
-	std::string ut=e.get_attribute_value("unit_test");
-//	std::cout << " [" << name << "-"; 
+	string toolst=e.get_attribute_value("toolset");
+//	string name=e.get_attribute_value("name");
 	c* instance=0;
-	if (format=="executable") {
-		instance=new executable();
-		if (ut=="yes" || ut=="true") {
-			instance->set_unit_test();
-		}
-//		std::cout << "exe]";
+	if (!toolst.empty()) {
+		instance=new mmmake::toolset();
 	}
 	else {
-		if (parent.get_sources().force_static_library(parent)) {
-				instance=new static_library();
-//				std::cout << "static lib]";
+		string format=e.get_attribute_value("format");
+		if (format=="executable") {
+			instance=new executable();
+			string ut=e.get_attribute_value("unit_test");
+			if (ut=="yes" || ut=="true") {
+				instance->set_unit_test();
+			}
 		}
 		else {
-			if (format=="shared library") {
-				instance=new shared_library();
-//				std::cout << "shared lib]";
+			if (parent.get_sources().force_static_library(parent)) {
+					instance=new static_library();
 			}
-			else if (format=="static library") {
-				instance=new static_library();
-//				std::cout << "static lib]";
+			else {
+				if (format=="shared library") {
+					instance=new shared_library();
+				}
+				else if (format=="static library") {
+					instance=new static_library();
+				}
 			}
 		}
 	}
-	std::cout.flush();
 	if (instance==0) return 0;
 	return instance;
 }

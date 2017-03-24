@@ -7,6 +7,7 @@ SOURCE_GROUP("" FILES ${dir_1_sources})
 set(all_headers ${dir_1_headers} )
 set(all_sources ${dir_1_sources} )
 
+add_definitions(-Wno-deprecated-declarations)
 add_executable(${prjname} ${all_headers} ${all_sources})
 
 set_target_properties(${prjname} PROPERTIES DEBUG_OUTPUT_NAME ${prjname}${DEBUG_TARGET_SUFFIX})

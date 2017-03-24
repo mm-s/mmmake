@@ -82,7 +82,7 @@ public:
 	virtual void write_cmake(const path&) const;
 
 	static target* create(project& parent, const dom_element& e);
-	void parse(project&,const dom_element&);
+	virtual void parse(project&,const dom_element&);
 
 	void resolvedeps();
 
@@ -106,6 +106,8 @@ private:
 	};
 	typedef std::list<depstr> depstrs;
 	depstrs _depstrs;
+
+	string toolset;
 };
 
 
