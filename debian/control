@@ -8,7 +8,7 @@ Homepage: http://mm-studios.com
 
 Package: mmmake
 Architecture: any
-Depends: cmake
+Depends: cmake, libxml++2.6-dev
 Description: C00L build T00L for C++ projects
  MMmake is a cool build tool for C++ projects
 
