@@ -1,4 +1,4 @@
-build-essential g++ cmake dpkg-dev xsltproc debhelper libxml++2.6-dev
+build-essential g++ cmake dpkg-dev xsltproc debhelper libxml++2.6-dev libboost-filesystem-dev
 zlib1g-dev libgtkmm-2.4-dev libglademm-2.4-dev libboost-regex-dev libboost-date-time-dev libboost-thread-dev libboost-filesystem-dev libboost-graph-dev libboost-program-options-dev libpq-dev
 
 
