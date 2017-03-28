@@ -136,7 +136,7 @@ std::string c::to_identif(const std::string& s) const {
 using namespace std;
 
 void c::write_definitions(std::ostream& os) const {
-cout << "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD " << _definitions.size() << " " << include.size() << endl;
+//cout << "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD " << _definitions.size() << " " << include.size() << endl;
 	for (definitions::const_iterator I=_definitions.begin(); I!=_definitions.end(); ++I)
 		os << "add_definitions(" << *I << ")" << endl;
 	for (auto& i:include)

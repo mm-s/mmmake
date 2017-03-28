@@ -5,12 +5,14 @@ typedef mmmake::shared_library c;
 
 
 void c::write_cmake(const path& p) const {
-	B::write_cmake(p);
+	b::write_cmake(p);
 }
 
 
 using namespace std;
 void c::write_definitions(std::ostream& os) const {
+	b::write_definitions(os);
+
 	os << endl;
 	os << "STRING(TOUPPER ${prjname} PRJNAME)" << endl;
 //        os << "string(REPLACE \"-\" \"_\" output ${PRJNAME})" << endl;

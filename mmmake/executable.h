@@ -10,7 +10,7 @@ namespace mmmake {
 
 
 class MMMAKE_EXPORT_IMPORT_POLICY executable: public target {
-	typedef target B;
+	typedef target b;
 public:
 	virtual void write_cmake(const path&) const;
 

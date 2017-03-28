@@ -11,7 +11,7 @@ namespace mmmake {
 
 
 class MMMAKE_EXPORT_IMPORT_POLICY static_library: public target {
-	typedef target B;
+	typedef target b;
 public:
 
 	virtual void write_cmake(const path&) const;

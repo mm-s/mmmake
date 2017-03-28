@@ -4,7 +4,7 @@ typedef mmmake::executable c;
 
 using namespace std;
 void c::write_cmake(const path& p) const {
-	B::write_cmake(p);
+	b::write_cmake(p);
 
 
 }
@@ -12,6 +12,7 @@ void c::write_cmake(const path& p) const {
 using namespace std;
 
 void c::write_definitions(std::ostream& os) const {
+	b::write_definitions(os);
 	if (get_name()=="test") {
 		os << "SET(prjname ${prjname}_test)" << endl;
 	}
