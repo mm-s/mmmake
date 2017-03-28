@@ -40,6 +40,7 @@ public:
 
 	typedef std::string definition;
 	typedef std::list<definition> definitions;
+	typedef std::vector<string> include;
 
 	inline const std::string& get_name() const { return _name; }
 	inline const project& get_project() const { return *_project; }

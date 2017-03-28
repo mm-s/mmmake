@@ -138,6 +138,8 @@ using namespace std;
 void c::write_definitions(std::ostream& os) const {
 	for (definitions::const_iterator I=_definitions.begin(); I!=_definitions.end(); ++I)
 		os << "add_definitions(" << *I << ")" << endl;
+	for (auto& i:include)
+		os << "include_directories(" << i << ")" << endl;
 }
 
 bool c::is_mingw() const {
@@ -375,6 +377,18 @@ void c::parse(mmmake::project& parent, const dom_element& e) {
 			if (el!=0) {
 				if (el->has_child_text()) {
 					_definitions.push_back(el->get_child_text()->get_content());
+				}
+			}
+		}
+	}
+
+	{
+		xmlpp::Node::NodeList ch=e.get_children("include");
+		for (xmlpp::Node::NodeList::const_iterator J=ch.begin(); J!=ch.end(); ++J) {
+			xmlpp::Element* el=dynamic_cast<xmlpp::Element*>(*J);
+			if (el!=0) {
+				if (el->has_child_text()) {
+					include.push_back(el->get_child_text()->get_content());
 				}
 			}
 		}
