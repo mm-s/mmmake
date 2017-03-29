@@ -24,7 +24,7 @@ IF (NOT JDKORACLE_FOUND)
 		SET(JDKORACLE_ARCH_INCLUDE ${grd}/include/linux )
 		MESSAGE(STATUS "Found JDKORACLE: ${JDKORACLE_ROOT_DIR}") 
 	ELSE (JDKORACLE_FOUND)
-		MESSAGE(FATAL_ERROR "Could not find JDKORACLE") 
+		MESSAGE(FATAL_ERROR "Could not find Oracle JDK, please download and install it from http://www.oracle.com/technetwork/java/javase/downloads") 
 	ENDIF (JDKORACLE_FOUND)
 
 ENDIF (NOT JDKORACLE_FOUND)
