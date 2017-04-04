@@ -88,7 +88,7 @@ c::dirs c::get_cpp_dirs(const path& p) const {
 		if (parent_name==".git") { I.pop(); continue; }
 		if (parent_name.find("_off",0)!=std::string::npos) { I.pop(); continue; }
 		std::string ext=I->path().extension().string();
-		if (ext==".c" || ext==".cpp" || ext==".cxx") {
+		if (ext==".c" || ext==".cpp" || ext==".cxx" || ext==".cc") {
 			if (spath==I->path().parent_path().string()) {
 				s.insert("");
 			}
@@ -210,10 +210,10 @@ void c::write_cmake(const path& prj_path) const {
 		std::string dir=*I;
 		std::string identif=to_identif(dir);
 		if (dir.empty()) {
-			os <<  "file (GLOB " << identif << "_sources *.cpp *.c)" << endl;
+			os <<  "file (GLOB " << identif << "_sources *.cpp *.c *.cc)" << endl;
 		}
 		else {
-			os <<  "file (GLOB " << identif << "_sources " << dir << "/*.cpp " << dir << "/*.c "  << dir << "/*.cxx)" << endl;  /**/
+			os <<  "file (GLOB " << identif << "_sources " << dir << "/*.cpp " << dir << "/*.c "  << dir << "/*.cxx)" << dir << "/*.cc)" << endl;  /**/
 		}
 		os << "SOURCE_GROUP(\"" << to_group(dir) << "\" FILES ${" << identif << "_sources})" << endl;
 	}
