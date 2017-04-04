@@ -1,0 +1,7 @@
+IF (EVENT_FOUND)
+
+FOREACH(LINKLIB ${EVENT_LIBRARIES}) 
+target_link_libraries(${prjname} ${LINKLIB})
+ENDFOREACH(LINKLIB)
+
+ENDIF()
