@@ -213,7 +213,7 @@ void c::write_cmake(const path& prj_path) const {
 			os <<  "file (GLOB " << identif << "_sources *.cpp *.c *.cc)" << endl;
 		}
 		else {
-			os <<  "file (GLOB " << identif << "_sources " << dir << "/*.cpp " << dir << "/*.c "  << dir << "/*.cxx)" << dir << "/*.cc)" << endl;  /**/
+			os <<  "file (GLOB " << identif << "_sources " << dir << "/*.cpp " << dir << "/*.c "  << dir << "/*.cxx " << dir << "/*.cc)" << endl;  /**/
 		}
 		os << "SOURCE_GROUP(\"" << to_group(dir) << "\" FILES ${" << identif << "_sources})" << endl;
 	}
