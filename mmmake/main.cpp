@@ -134,7 +134,7 @@ void invoke_cmake(const mmmake::sources& src) {
 	string toolchainpart;
 	if (!cross.empty()) {
 		ostringstream os;
-		os << "-DCMAKE_TOOLCHAIN_FILE=" << (src._data_prefix / "toolchain").generic_string() << "/" << cross << ".cmake ";
+		os << "-DCMAKE_TOOLCHAIN_FILE=" << (src.get_prefix() / "toolchain").generic_string() << "/" << cross << ".cmake ";
 		toolchainpart=os.str();
 	}
 /*
