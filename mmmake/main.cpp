@@ -1,16 +1,3 @@
-/*
-   *****************************************************************
-    BlockChain SDK
-    (C) 2017 nChain - London.
-
-    TODO: Licence info.
-
-    Rev date: 2017-02-23T14:50:45.000000Z                         
-    Rev : 7                         
-   *****************************************************************
-*/
-
-
 #include "disem.h"
 
 #include <iostream>
@@ -24,24 +11,24 @@ void usage() {
 	cout << "  mmmake <project name>" << endl;
 	cout << "     assumes '../src' as <sources dir> and config is taken from parent dirname (debug or release)" << endl;
 	cout << "" << endl;
-	cout << "un mensaje:" << endl;
-	cout << " si quieres evitarte problemas que no te apetece intentar resolver es mejor que invoques \"mmmake <proyecto>\" desde dentro de un directorio llamado \"debug\" que se encuentra dentro de un directorio llamado \"trunk\", bajo el cual se encuentra el \"checkout\" de la rama trunk del repositorio en el directorio \"src\"  " << endl;
-	cout << "  , es decir:" << endl;
-	cout << "  mkdir trunk; cd trunk" << endl;
-	cout << "  svn co http://servidor/svn/trunk src" << endl;
-	cout << "  mkdir debug; cd debug" << endl;
-	cout << "  mmmake <tu proyecto>" << endl;
-	cout << "" << endl;
-	cout << "environment variables:" << endl;
-	cout << "   CMAKE_GENERATOR  (i.e.=\"CodeBlocks - Unix Makefiles\") see cmake --help for generators. defaults to KDevelop3" << endl;
-	cout << "" << endl;
-	cout << "example:" << endl;
-	cout << "  $> ls" << endl;
-	cout << "  src/ release/" << endl;
-	cout << "  $> mkdir debug" << endl;
-	cout << "  $> cd debug" << endl;
-	cout << "  $> mmmake ../src hifisim debug" << endl;
-	cout << "" << endl;
+//	cout << "un mensaje:" << endl;
+//	cout << " si quieres evitarte problemas que no te apetece intentar resolver es mejor que invoques \"mmmake <proyecto>\" desde dentro de un directorio llamado \"debug\" que se encuentra dentro de un directorio llamado \"trunk\", bajo el cual se encuentra el \"checkout\" de la rama trunk del repositorio en el directorio \"src\"  " << endl;
+//	cout << "  , es decir:" << endl;
+//	cout << "  mkdir trunk; cd trunk" << endl;
+//	cout << "  svn co http://servidor/svn/trunk src" << endl;
+//	cout << "  mkdir debug; cd debug" << endl;
+//	cout << "  mmmake <tu proyecto>" << endl;
+//	cout << "" << endl;
+//	cout << "environment variables:" << endl;
+//	cout << "   CMAKE_GENERATOR  (i.e.=\"CodeBlocks - Unix Makefiles\") see cmake --help for generators. defaults to KDevelop3" << endl;
+//	cout << "" << endl;
+//	cout << "example:" << endl;
+//	cout << "  $> ls" << endl;
+//	cout << "  src/ release/" << endl;
+//	cout << "  $> mkdir debug" << endl;
+//	cout << "  $> cd debug" << endl;
+//	cout << "  $> mmmake ../src <project> debug" << endl;
+//	cout << "" << endl;
 	cout << "environment:" << endl;
 	cout << "  MMMAKE_CROSS=<toolset>" << endl;
 	cout << "     toolset can be any of:" << endl;
@@ -51,7 +38,7 @@ void usage() {
 	cout << "  MMMAKE_TWO_PHASE_WRITE=yes   write files only if the new content is different" << endl;
 
 	cout << "" << endl;
-	cout << "send greeting to:" << endl;
+	cout << "Author" << endl;
 	cout << "  Marcos Mayorga - mm@mm-studios.com" << endl; //marcos.f.mayorgaaguirre@boeing.com; marcos@fairluck.org" << endl;
 	cout << "  Boeing BR&TE 2009 2010 (as bmake)" << "; mm-studios 2014-2017" << endl;
 }
@@ -143,6 +130,14 @@ void invoke_cmake(const mmmake::sources& src) {
 	std::string cross;
 	mmmake::sources::from_env(cross,"MMMAKE_CROSS");
 
+
+	string toolchainpart;
+	if (!cross.empty()) {
+		ostringstream os;
+		os << "-DCMAKE_TOOLCHAIN_FILE=" << (src._data_prefix / "toolchain").generic_string() << "/" << cross << ".cmake ";
+		toolchainpart=os.str();
+	}
+/*
 	if (cross == "MINGW32") {
 		std::cout << "setting environment variables to cross compile with mingw" << std::endl;
 		putenv((char*)"CC=i586-mingw32msvc-gcc");
@@ -171,7 +166,7 @@ void invoke_cmake(const mmmake::sources& src) {
 		putenv((char*)"OBJDUMP=");
 		putenv((char*)"RESCOMP=");
 	}
-
+*/
 	{
         std::ostringstream oss;
         oss << "CMAKE_MODULE_PATH=" << (src.get_prefix() / "cmakemodules").string();
@@ -183,8 +178,8 @@ void invoke_cmake(const mmmake::sources& src) {
         ///
 	}
 	std::ostringstream oss;
-	oss << "cmake -G \"" << generator << "\" " << src.get_path().string();
-    cout << "Executing " << oss.str() << endl;
+	oss << "cmake -G \"" << generator << "\" " << toolchainpart << src.get_path().string();
+	cout << "Executing " << oss.str() << endl;
 	system(oss.str().c_str());
 
 }
