@@ -1,13 +1,15 @@
 # the name of the target operating system
 SET(CMAKE_SYSTEM_NAME Windows)
 
+SET(TUPLE x86_64-w64-mingw32)
+
 # which compilers to use for C and C++
-SET(CMAKE_C_COMPILER x86_64-linux-gnu-gcc)
-SET(CMAKE_CXX_COMPILER x86_64-linux-gnu-g++)
-SET(CMAKE_RC_COMPILER x86_64-linux-gnu-windres)
+SET(CMAKE_C_COMPILER ${TUPLE}-gcc)
+SET(CMAKE_CXX_COMPILER ${TUPLE}-g++)
+SET(CMAKE_RC_COMPILER ${TUPLE}-windres)
 
 # here is the target environment located
-SET(CMAKE_FIND_ROOT_PATH  /usr/x86_64-linux-gnu $ENV{HOME}/mingw-install )
+SET(CMAKE_FIND_ROOT_PATH  /usr/${TUPLE} $ENV{HOME}/mingw-install )
 
 # adjust the default behaviour of the FIND_XXX() commands:
 # search headers and libraries in the target environment, search 
