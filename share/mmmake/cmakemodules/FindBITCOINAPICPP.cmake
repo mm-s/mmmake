@@ -1,4 +1,13 @@
-# - Find bitcoinapipp - debian package libjsoncpp-dev
+# - Find bitcoinapipp 
+# INSTRUCTIONS TO INSTALL
+# git clone https://github.com/mm-s/bitcoin-api-cpp.git
+# cd bitcoin-api-cpp/
+# mkdir build; cd build
+# cmake ..
+# make
+# sudo make install
+# sudo ldconfig
+
 # Find the native BITCOINAPICPP headers and libraries.
 #
 #  BITCOINAPICPP_INCLUDE_DIRS   - where to find
