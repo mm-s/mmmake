@@ -1,0 +1,7 @@
+IF (PBC_FOUND)
+
+FOREACH(LINKLIB ${PBC_LIBRARIES}) 
+target_link_libraries(${prjname} ${LINKLIB})
+ENDFOREACH(LINKLIB)
+
+ENDIF()
