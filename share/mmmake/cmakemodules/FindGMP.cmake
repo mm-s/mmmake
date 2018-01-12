@@ -19,7 +19,7 @@ FIND_LIBRARY( GMP_LIBRARY
 	/usr/lib/x86_64-linux-gnu
 )
 FIND_LIBRARY( GMP_LIBRARYXX
-  NAMES gmpxx4ldbl
+  NAMES gmpxx
   PATHS /usr/lib
         /usr/local/lib
 	/usr/lib/x86_64-linux-gnu
