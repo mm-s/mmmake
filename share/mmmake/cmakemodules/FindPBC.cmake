@@ -1,11 +1,11 @@
-# - Find PBC - source package https://crypto.stanford.edu/pbc/download.html
-# Find the native headers and libraries.
+# - Find PBC - sources https://crypto.stanford.edu/pbc/files/pbc-0.5.14.tar.gz
+# Find the native PBC headers and libraries.
 #
 #  PBC_INCLUDE_DIRS   - where to find
 #  PBC_LIBRARIES      - List of libraries when using it.
 #  PBC_FOUND          - True if found.
 
-find_path(PBC_INCLUDE_DIR pbc/pbc_hilbert.h
+find_path(PBC_INCLUDE_DIR pbc/pbc.h
   /usr/include
   /usr/local/include
   DOC "Directory containing PBC headers"
@@ -16,12 +16,12 @@ FIND_LIBRARY( PBC_LIBRARY
   NAMES pbc
   PATHS /usr/lib
         /usr/local/lib
-	/usr/lib/i386-linux-gnu
+	/usr/lib/x86_64-linux-gnu
 )
 
 mark_as_advanced(PBC_LIBRARY)
 
-# handle the QUIETLY and REQUIRED arguments and set Found to TRUE if
+# handle the QUIETLY and REQUIRED arguments and set CURL_FOUND to TRUE if
 # all listed variables are TRUE
 
   if ( NOT PBC_INCLUDE_DIR OR NOT PBC_LIBRARY )
@@ -37,5 +37,4 @@ mark_as_advanced(PBC_LIBRARY)
 if(PBC_FOUND)
   set(PBC_LIBRARIES ${PBC_LIBRARY})
   set(PBC_INCLUDE_DIRS ${PBC_INCLUDE_DIR})
-  MESSAGE(STATUS "Found PBC: ${PBC_INCLUDE_DIR}")
 endif()

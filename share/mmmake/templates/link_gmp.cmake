@@ -1,0 +1,7 @@
+IF (GMP_FOUND)
+
+FOREACH(LINKLIB ${GMP_LIBRARIES}) 
+target_link_libraries(${prjname} ${LINKLIB})
+ENDFOREACH(LINKLIB)
+
+ENDIF()
