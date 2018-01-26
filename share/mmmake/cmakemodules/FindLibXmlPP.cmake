@@ -137,36 +137,43 @@ endif (MSVC80)
 FIND_LIBRARY(LIBXMLPP_LIBS NAMES xml++-2.6 libxml++-2.6 xml++-vc${MSVC_COMPILER}-2_6
    PATHS
    /usr/lib
+   /usr/lib/${TRIPLET}
    c:/GTK/lib
    )
 FIND_LIBRARY(LIBXML2_LIBS NAMES xml2 libxml2
    PATHS
    /usr/lib
+   /usr/lib/${TRIPLET}
    c:/GTK/lib
    )
 FIND_LIBRARY(LIBGLIBMM_LIBS NAMES glibmm-2.4 libglibmm-2.4 glibmm-vc${MSVC_COMPILER}-2_4
    PATHS
    /usr/lib
+   /usr/lib/${TRIPLET}
    c:/GTK/lib
    )
 FIND_LIBRARY(LIBGLIB_LIBS NAMES glib-2.0 libglib-2.0 glib-vc${MSVC_COMPILER}-2_0
    PATHS
    /usr/lib
+   /usr/lib/${TRIPLET}
    c:/GTK/lib
    )
 FIND_LIBRARY(LIBGOBJECT_LIBS NAMES gobject-2.0 libgobject-2.0
    PATHS
    /usr/lib
+   /usr/lib/${TRIPLET}
    c:/GTK/lib
    )
 FIND_LIBRARY(LIBSIGC_LIBS NAMES sigc-2.0 libsigc-2.0 sigc-vc${MSVC_COMPILER}-2_0
    PATHS
    /usr/lib
+   /usr/lib/${TRIPLET}
    c:/GTK/lib
    )
 FIND_LIBRARY(LIBXML2_LIBS NAMES xml2
    PATHS
    /usr/lib
+   /usr/lib/${TRIPLET}
    c:/GTK/lib
    )
 
