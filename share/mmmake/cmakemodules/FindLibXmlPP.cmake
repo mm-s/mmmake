@@ -29,6 +29,11 @@ ENDIF (LIBXMLPP_INCLUDE_DIR AND LIBXMLPP_LIBRARIES)
 #ENDFOREACH(LINKLIB)
 
 EXEC_PROGRAM(gcc ARGS -dumpmachine OUTPUT_VARIABLE TRIPLET)
+MESSAGE(STATUS "TRIPLET: ${TRIPLET}")
+EXEC_PROGRAM(dpkg ARGS --print-architecture OUTPUT_VARIABLE TRIPLET2_PFX)
+SET(TRIPLET2 "${TRIPLET2_PFX}_linux_gnu")
+MESSAGE(STATUS "TRIPLET2: ${TRIPLET2}")
+
 
 FIND_PATH(LIBXMLPP_MAIN_INCLUDE_DIR libxml++/libxml++.h
    PATHS
@@ -40,6 +45,7 @@ FIND_PATH(LIBXMLPP_LIB_INCLUDE_DIR libxml++config.h
    PATHS
    /usr/lib
    /usr/lib/${TRIPLET}
+   /usr/lib/${TRIPLET2}
 #   /usr/lib/x86_64-linux-gnu
    c:/GTK/lib
    PATH_SUFFIXES libxml++-2.6/include
@@ -55,6 +61,7 @@ FIND_PATH(LIBXMLPP_GLIB_LIB_INCLUDE_DIR glibconfig.h
    /usr/lib
 #   /usr/lib/x86_64-linux-gnu
    /usr/lib/${TRIPLET}
+   /usr/lib/${TRIPLET2}
    c:/GTK/lib
    PATH_SUFFIXES glib-2.0/include
    )
@@ -66,6 +73,7 @@ FIND_PATH(LIBXMLPP_GLIBMM_LIB_INCLUDE_DIR glibmmconfig.h
 #   /usr/lib/i386-linux-gnu
 #   /usr/lib/x86_64-linux-gnu
    /usr/lib/${TRIPLET}
+   /usr/lib/${TRIPLET2}
 
    c:/GTK/lib
    PATH_SUFFIXES glibmm-2.4/include
@@ -81,6 +89,7 @@ FIND_PATH(LIBXMLPP_GLIB_LIB_INCLUDE_DIR glibconfig.h
    /usr/lib
    c:/GTK/lib
    /usr/lib/${TRIPLET}
+   /usr/lib/${TRIPLET2}
 #   /usr/lib/i386-linux-gnu
 #   /usr/lib/x86_64-linux-gnu
    PATH_SUFFIXES glib-2.0/include
@@ -96,6 +105,7 @@ FIND_PATH(LIBXMLPP_SIGCpp_LIB_INCLUDE_DIR sigc++config.h
    /usr/lib
    c:/GTK/lib
    /usr/lib/${TRIPLET}
+   /usr/lib/${TRIPLET2}
 #   /usr/lib/i386-linux-gnu
 #   /usr/lib/x86_64-linux-gnu
    PATH_SUFFIXES sigc++-2.0/include
@@ -104,6 +114,8 @@ FIND_PATH(LIBXML2_INCLUDE_DIR libxml/parser.h
    PATHS
    /usr/include
    c:/GTK/include
+   /usr/lib/${TRIPLET}
+   /usr/lib/${TRIPLET2}
    $ENV{ATTDEPENDENCIESROOT}/GTK/include
    /sw/include
    PATH_SUFFIXES libxml2
@@ -146,7 +158,6 @@ FIND_LIBRARY(LIBXML2_LIBS NAMES xml2 libxml2
    /usr/lib/${TRIPLET}
    c:/GTK/lib
    )
-MESSAGE(STATUS "TRIPLET: ${TRIPLET}")
 FIND_LIBRARY(LIBGLIBMM_LIBS NAMES glibmm-2.4 libglibmm-2.4 glibmm-vc${MSVC_COMPILER}-2_4
    PATHS
    /usr/lib
